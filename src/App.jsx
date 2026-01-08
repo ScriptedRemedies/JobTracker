@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import JobCard from './components/JobCard'
 import AddJobForm from './components/AddJobForm'
+import Swal from 'sweetalert2'
 
 function App() {
     const [jobs, setJobs] = useState(() => {
@@ -22,6 +23,7 @@ function App() {
 
     const deleteJob = (id) => {
         setJobs(jobs.filter((j) => j.id !== id))
+
     }
 
     const editJob = (id, updatedJob) => {
