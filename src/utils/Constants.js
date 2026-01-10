@@ -1,0 +1,4 @@
+export const WORK_MODEL = ["Remote", "Hybrid", "On-Site"]
+export const STATUS = ["Not Applied", "Applied", "Interviewing", "Offered", "Rejected", "Ghosted"]
+export const FIT_STATUS = ['Would Prefer', 'Average', 'No Preference']
+export const STAGE = ["Not Started", "Screening - Phone", "Screening - Video", "Hiring Manager Interview", "Skills Assessment", "Team/Panel Interview", "Final Interview", "Reference & Background Check", "Offer", "Rejection"]

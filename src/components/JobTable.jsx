@@ -11,7 +11,7 @@ function JobTable({ jobs, onEdit, onDelete}) {
                         <th scope="col">Company</th>
                         <th scope="col">Location</th>
                         <th scope="col">Work Model</th>
-                        <th scope="col">Salary Range</th>
+                        <th scope="col">Salary</th>
                         <th scope="col">Fit Status</th>
                         <th scope="col">Fit Reason</th>
                         <th scope="col">Job Posting</th>
@@ -33,7 +33,9 @@ function JobTable({ jobs, onEdit, onDelete}) {
                             <td>{job.company}</td>
                             <td>{job.location}</td>
                             <td>{job.workModel}</td>
-                            <td>{job.salary}</td>
+                            <td>
+                                {job.salary ? `$${job.salary}` : "Not Listed"}
+                            </td>
                             <td>{job.fitStatus}</td>
                             <td>{job.fitReason}</td>
                             <td>{job.jobPostingLink}</td>

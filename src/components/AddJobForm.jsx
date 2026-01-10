@@ -1,11 +1,9 @@
 import React, {useState} from 'react'
 import { notifySuccess, notifyError } from '../utils/Toast'
+import { WORK_MODEL, STATUS, FIT_STATUS, STAGE } from '../utils/constants'
 
 function AddJobForm({ onAdd }) {
-    const WORK_MODEL = ["Remote", "Hybrid", "On-Site"]
-    const STATUS = ["Not Applied", "Applied", "Interviewing", "Offered", "Rejected", "Ghosted"]
-    const FIT_STATUS = ['Would Prefer', 'Average', 'No Preference']
-    const STAGE = ["Not Started", "Screening - Phone", "Screening - Video", "Hiring Manager Interview", "Skills Assessment", "Team/Panel Interview", "Final Interview", "Reference & Background Check", "Offer", "Rejection"]
+
     const getTodayString = () => {
         const today = new Date();
         const localDate = new Date(today.getTime() - (today.getTimezoneOffset() * 60000));
@@ -100,7 +98,17 @@ function AddJobForm({ onAdd }) {
                 {/* Salary */}
                 <div className="col-md-3">
                     <label className="form-label fw-bold">Salary</label>
-                    <input name="salary" type="text" className="form-control" value={formState.salary} onChange={handleChange} />
+                    <div className="input-group">
+                        <span className="input-group-text">$</span>
+                        <input
+                            name="salary"
+                            type="number"
+                            className="form-control"
+                            value={formState.salary}
+                            onChange={handleChange}
+                            placeholder="e.g. 65000"
+                        />
+                    </div>
                 </div>
 
                 {/* Fit Status */}
@@ -145,7 +153,7 @@ function AddJobForm({ onAdd }) {
 
                 {/* Applied Through */}
                 <div className="col-md-3">
-                    <label className="form-label fw-bold">Applied Through:</label>
+                    <label className="form-label fw-bold">Applied Through</label>
                     <input name="appliedThrough" type="text" className="form-control" value={formState.appliedThrough} onChange={handleChange} />
                 </div>
 

@@ -5,6 +5,7 @@ import {confirmAction, notifySuccess} from "./utils/Toast.js";
 import StatusChart from "./components/StatusChart.jsx";
 import AddActionItemForm from "./components/AddActionItemForm.jsx";
 import JobTable from "./components/JobTable.jsx";
+import Goals from "./components/Goals.jsx";
 
 function App() {
     // JOBS ITEMS
@@ -80,6 +81,19 @@ function App() {
 
     }
 
+    // GOALS
+    const [goals, setGoals] = useState(() => {
+        const savedGoals = localStorage.getItem('my-goals')
+        return savedGoals ? JSON.parse(savedGoals) : { position: '', workModel: 'Remote', salary: '' }
+    })
+
+    useEffect(() => {
+        localStorage.setItem('my-goals', JSON.stringify(goals))
+    }, [goals])
+
+    const updateGoals = (newGoals) => {
+        setGoals(newGoals)
+    }
 
     return (
         <div className="container-fluid bg-light min-vh-100 p-4">
@@ -87,10 +101,11 @@ function App() {
             {/* MAIN DASHBOARD GRID */}
             <div className="row">
 
-                {/* LEFT SIDEBAR: Chart & Stats */}
+                {/* LEFT SIDEBAR: Chart, Stats, Goals */}
                 <div className="col-md-3 mb-4">
                     <StatusChart jobs={jobs} />
                     <AddActionItemForm tasks={tasks} onAdd={addTask} onToggle={toggleTask} onDelete={deleteTask} />
+                    <Goals onUpdate={updateGoals} initialData={goals} />
                 </div>
 
                 {/* RIGHT CONTENT: The Job Board */}
@@ -103,7 +118,7 @@ function App() {
 
                     <h4 className="mb-3">Applications in Progress</h4>
 
-                    {/* KANBAN COLUMNS */}
+                    {/* COLUMNS */}
                     <div className="row g-3">
                         {STATUS_COLUMNS.map(status => {
                             // Filter jobs that belong to this column
