@@ -4,11 +4,11 @@ import AddJobForm from './components/AddJobForm'
 import {confirmAction, notifySuccess} from "./utils/Toast.js";
 import StatusChart from "./components/StatusChart.jsx";
 import AddActionItemForm from "./components/AddActionItemForm.jsx";
+import JobTable from "./components/JobTable.jsx";
 
 function App() {
     // JOBS ITEMS
     const STATUS_COLUMNS = ["Applied", "Interviewing", "Offered", "Rejected", "Ghosted"]
-
     const [jobs, setJobs] = useState(() => {
         const saved = localStorage.getItem('my-job-tracker')
         return saved ? JSON.parse(saved) : []
@@ -125,7 +125,7 @@ function App() {
                                                 // Wrapper Div for "Click to Open Details"
                                                 <div
                                                     key={job.id}
-                                                    onClick={() => handleJobClick(job)} // <--- THIS IS THE CLICK HANDLER
+                                                    onClick={() => handleJobClick(job)}
                                                     style={{ cursor: 'pointer' }}
                                                 >
                                                     <JobCard
@@ -143,6 +143,11 @@ function App() {
                     </div>
 
                 </div>
+            </div>
+
+            {/* Table */}
+            <div className="w-100">
+                <JobTable jobs={jobs} onEdit={editJob} onDelete={deleteJob} />
             </div>
         </div>
     )

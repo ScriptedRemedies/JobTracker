@@ -4,6 +4,7 @@ import { notifySuccess, notifyError } from '../utils/Toast'
 function AddJobForm({ onAdd }) {
     const WORK_MODEL = ["Remote", "Hybrid", "On-Site"]
     const STATUS = ["Not Applied", "Applied", "Interviewing", "Offered", "Rejected", "Ghosted"]
+    const FIT_STATUS = ['Would Prefer', 'Average', 'No Preference']
     const STAGE = ["Not Started", "Screening - Phone", "Screening - Video", "Hiring Manager Interview", "Skills Assessment", "Team/Panel Interview", "Final Interview", "Reference & Background Check", "Offer", "Rejection"]
     const getTodayString = () => {
         const today = new Date();
@@ -17,8 +18,13 @@ function AddJobForm({ onAdd }) {
         location: '',
         workModel: 'Remote',
         salary: '',
+        fitStatus: 'Average',
+        fitReason: '',
+        jobPostingLink: '',
+        jobAppPortalLink: '',
         status: 'Not Applied',
         dateApplied: getTodayString(),
+        appliedThrough: '',
         stage: 'Not Started',
         interviewDate: '',
         contact: '',
@@ -45,8 +51,13 @@ function AddJobForm({ onAdd }) {
             location: '',
             workModel: 'Remote',
             salary: '',
+            fitStatus: 'Average',
+            fitReason: '',
+            jobPostingLink: '',
+            jobAppPortalLink: '',
             status: 'Not Applied',
             dateApplied: getTodayString(),
+            appliedThrough: '',
             stage: 'Not Started',
             interviewDate: '',
             contact: '',
@@ -92,6 +103,32 @@ function AddJobForm({ onAdd }) {
                     <input name="salary" type="text" className="form-control" value={formState.salary} onChange={handleChange} />
                 </div>
 
+                {/* Fit Status */}
+                <div className="col-md-3">
+                    <label className="form-label fw-bold">How Good of a Fit?</label>
+                    <select name="fitStatus" className="form-select" value={formState.fitStatus} onChange={handleChange}>
+                        {FIT_STATUS.map(status => <option key={status} value={status}>{status}</option>)}
+                    </select>
+                </div>
+
+                {/* Fit Reason */}
+                <div className="col-md-3">
+                    <label className="form-label fw-bold">Fit Reason</label>
+                    <input name="fitReason" type="text" className="form-control" value={formState.fitReason} onChange={handleChange} />
+                </div>
+
+                {/* Job Posting Link */}
+                <div className="col-md-3">
+                    <label className="form-label fw-bold">Job Posting Link</label>
+                    <input name="jobPostingLink" type="text" className="form-control" value={formState.jobPostingLink} onChange={handleChange} />
+                </div>
+
+                {/* Job Application Portal Link */}
+                <div className="col-md-3">
+                    <label className="form-label fw-bold">Job Portal Link</label>
+                    <input name="jobAppPortalLink" type="text" className="form-control" value={formState.jobAppPortalLink} onChange={handleChange} />
+                </div>
+
                 {/* Status */}
                 <div className="col-md-3">
                     <label className="form-label fw-bold">Status</label>
@@ -104,6 +141,12 @@ function AddJobForm({ onAdd }) {
                 <div className="col-md-3">
                     <label className="form-label fw-bold">Date Applied</label>
                     <input name="dateApplied" type="date" className="form-control" value={formState.dateApplied} onChange={handleChange} />
+                </div>
+
+                {/* Applied Through */}
+                <div className="col-md-3">
+                    <label className="form-label fw-bold">Applied Through:</label>
+                    <input name="appliedThrough" type="text" className="form-control" value={formState.appliedThrough} onChange={handleChange} />
                 </div>
 
                 {/* Stage */}
@@ -121,20 +164,20 @@ function AddJobForm({ onAdd }) {
                 </div>
 
                 {/* Contact */}
-                <div className="col-md-3">
+                <div className="col-md-6">
                     <label className="form-label fw-bold">Contact Info</label>
-                    <input name="contact" type="text" className="form-control" value={formState.contact} onChange={handleChange} />
+                    <textarea name="contact" className="form-control" value={formState.contact} onChange={handleChange} />
                 </div>
 
                 {/* Notes (Takes up remaining space) */}
-                <div className="col-md-6">
+                <div className="col-md-12">
                     <label className="form-label fw-bold">Notes</label>
-                    <input name="notes" type="text" className="form-control" value={formState.notes} onChange={handleChange} />
+                    <textarea name="notes" className="form-control" value={formState.notes} onChange={handleChange} />
                 </div>
 
                 {/* Add Button */}
                 <div className="col-12 mt-4 text-end">
-                    <button onClick={handleSubmit} className="btn btn-primary px-4">
+                    <button onClick={handleSubmit} className="btn btn-outline-secondary btn-sm">
                         Add Job Application
                     </button>
                 </div>

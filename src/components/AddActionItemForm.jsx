@@ -5,7 +5,10 @@ function AddActionItemForm({ tasks, onAdd, onToggle, onDelete }) {
     const [newItem, setNewItem] = useState('')
 
     const handleAdd = () => {
-        if (!newItem.trim()) return
+        if (!newItem.trim()) {
+            notifyError('Missing Required Fields', 'Please enter a item to complete.')
+            return
+        }
         onAdd(newItem)
         setNewItem('')
         notifySuccess('Action Item Added!')
