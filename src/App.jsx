@@ -6,6 +6,7 @@ import AddActionItemForm from "./components/AddActionItemForm.jsx";
 import JobTable from "./components/JobTable.jsx";
 import Goals from "./components/Goals.jsx";
 import InProgressApps from "./components/InProgressApps.jsx";
+import CollapsibleSection from "./components/CollapsibleSection.jsx";
 
 function App() {
     // JOBS ITEMS
@@ -107,19 +108,19 @@ function App() {
                 <div className="col-md-9">
 
                     {/* Add Job Form */}
-                    <div className="mb-4 bg-white p-3 rounded shadow-sm">
+                    <CollapsibleSection title="Add New Application" defaultExpanded={false}>
                         <AddJobForm onAdd={addJob} />
-                    </div>
+                    </CollapsibleSection>
 
                     {/* In Progress Apps */}
-                    <div className="mb-4 bg-white p-3 rounded shadow-sm">
+                    <CollapsibleSection title="In Progress Applications" defaultExpanded={true}>
                         <InProgressApps jobs={jobs} onEdit={editJob} onDelete={deleteJob} />
-                    </div>
+                    </CollapsibleSection>
 
                     {/* Table */}
-                    <div className="mb-4 bg-white p-3 rounded shadow-sm">
+                    <CollapsibleSection title="All Applications" defaultExpanded={true}>
                         <JobTable jobs={jobs} onEdit={editJob} onDelete={deleteJob} />
-                    </div>
+                    </CollapsibleSection>
                 </div>
             </div>
 

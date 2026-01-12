@@ -5,7 +5,7 @@ function JobCard({ job, onEdit, onDelete }) {
     const [editedJob, setEditedJob] = useState(job);
 
     const handleSave = (e) => {
-        e.stopPropagation(); // Stop the click from triggering "Open Details"
+        e.stopPropagation();
         onEdit(job.id, editedJob);
         setIsEditing(false);
     };
