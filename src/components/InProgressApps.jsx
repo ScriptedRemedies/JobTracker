@@ -10,33 +10,36 @@ function InProgressApps({ jobs, onEdit, onDelete }) {
     }
 
     return (
-        <div className="container mb-4 p-4 border rounded shawdow-sm bg-light w-80">
-            <h4 className="mb-3">Applications in Progress</h4>
-
-            {/* COLUMNS */}
-            <div className="row g-3">
+        <div className="w-100">
+            <div className="d-flex flex-column gap-4">
                 {STATUS_COLUMNS.map(status => {
-                    // Filter jobs that belong to this column
                     const jobsInColumn = jobs.filter(j => j.status === status)
 
                     return (
-                        <div key={status} className="col-md-6 col-lg-3">
-                            <div className="p-2 rounded" style={{ backgroundColor: '#e9ecef', minHeight: '100%' }}>
-                                {/* Column Header */}
-                                <h6 className="fw-bold text-uppercase text-secondary small mb-3 ps-1">
-                                    {status} <span className="badge bg-secondary rounded-pill">{jobsInColumn.length}</span>
-                                </h6>
+                        <div key={status} className="w-100">
 
-                                {/* Job Cards List */}
+                            {/* Category Header */}
+                            <h6 className="fw-bold text-uppercase text-secondary small mb-2 border-bottom pb-1">
+                                {status} <span className="badge bg-secondary rounded-pill ms-1">{jobsInColumn.length}</span>
+                            </h6>
+
+                            {/* Horizontal Scroll Container */}
+                            <div
+                                className="d-flex flex-row flex-nowrap overflow-auto pb-2"
+                                style={{ gap: '15px' }} // Spacing between cards
+                            >
                                 {jobsInColumn.length === 0 ? (
-                                    <p className="text-muted small text-center fst-italic">Empty</p>
+                                    <p className="text-muted small fst-italic ps-1">No applications in this stage.</p>
                                 ) : (
                                     jobsInColumn.map(job => (
-                                        // Wrapper Div for "Click to Open Details"
                                         <div
                                             key={job.id}
                                             onClick={() => handleJobClick(job)}
-                                            style={{ cursor: 'pointer' }}
+                                            style={{
+                                                cursor: 'pointer',
+                                                minWidth: '320px',
+                                                maxWidth: '320px'
+                                            }}
                                         >
                                             <JobCard
                                                 job={job}
