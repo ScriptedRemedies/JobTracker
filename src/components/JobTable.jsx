@@ -1,6 +1,35 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { WORK_MODEL, STATUS, FIT_STATUS, STAGE } from '../utils/constants'
 
 function JobTable({ jobs, onEdit, onDelete}) {
+    // STATE TO TRACK WHICH ROW IS BEING EDITED
+    const [editingId, setEditingId] = useState(null);
+    const [editFormData, setEditFormData] = useState({});
+
+    // START EDITING
+    const handleEditClick = (job) => {
+        setEditingId(job.id);
+        setEditFormData(job);
+    }
+
+    // CANCEL EDITING
+    const handleCancelClick = () => {
+        setEditingId(null);
+        setEditFormData({});
+    }
+
+    // HANDLE INPUT CHANGES
+    const handleEditFormChange = (e) => {
+        const { name, value } = e.target;
+        setEditFormData({ ...editFormData, [name]: value });
+    }
+
+    // SAVE CHANGES
+    const handleSaveClick = () => {
+        onEdit(editingId, editFormData);
+        setEditingId(null); // Exit edit mode
+    }
+
     return (
         <div className="table-responsive">
             <table className="table table-hover table-striped mt-3 align-middle">

@@ -3,11 +3,10 @@ import JobCard from "./JobCard.jsx";
 import { STATUS_COLUMNS } from "../utils/Constants"
 import {Draggable, Droppable} from "@hello-pangea/dnd";
 
-function InProgressApps({ jobs, onEdit, onDelete }) {
+function InProgressApps({ jobs, onEdit, onDelete, onViewDetails }) {
 
     const handleJobClick = (job) => {
-        console.log("Open Details for:", job.company)
-        // FUTURE: navigate('/job/' + job.id) or setIsModalOpen(true)
+        onViewDetails(job);
     }
 
     return (

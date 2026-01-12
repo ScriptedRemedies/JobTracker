@@ -8,6 +8,7 @@ import Goals from "./components/Goals.jsx";
 import InProgressApps from "./components/InProgressApps.jsx";
 import CollapsibleSection from "./components/CollapsibleSection.jsx";
 import { DragDropContext } from '@hello-pangea/dnd';
+import JobDetailDrawer from "./components/JobDetailDrawer.jsx";
 
 function App() {
     // JOBS ITEMS
@@ -15,11 +16,9 @@ function App() {
         const saved = localStorage.getItem('my-job-tracker')
         return saved ? JSON.parse(saved) : []
     })
-
     useEffect(() => {
         localStorage.setItem('my-job-tracker', JSON.stringify(jobs))
     }, [jobs])
-
     const addJob = (jobData) => {
         const newJob = {
             id: Date.now(),
@@ -43,11 +42,9 @@ function App() {
         const savedTasks = localStorage.getItem('my-tasks')
         return savedTasks ? JSON.parse(savedTasks) : []
     })
-
     useEffect(() => {
         localStorage.setItem('my-tasks', JSON.stringify(tasks))
     }, [tasks])
-
     const addTask = (taskText) => {
         const newTask = {
             id: Date.now(),
@@ -83,11 +80,9 @@ function App() {
         const savedGoals = localStorage.getItem('my-goals')
         return savedGoals ? JSON.parse(savedGoals) : { position: '', workModel: 'Remote', salary: '' }
     })
-
     useEffect(() => {
         localStorage.setItem('my-goals', JSON.stringify(goals))
     }, [goals])
-
     const updateGoals = (newGoals) => {
         setGoals(newGoals)
     }
@@ -96,7 +91,6 @@ function App() {
     const handleDragEnd = (result) => {
         const { source, destination, draggableId } = result;
 
-        // If dropped outside a valid list, do nothing
         if (!destination) return;
 
         // If dropped in the same place, do nothing
@@ -108,7 +102,6 @@ function App() {
         }
 
         // Find the job that was dragged (draggableId should be the job ID)
-        // Note: draggableId is usually a string, so we might need to parse it if your IDs are numbers
         const draggedJobId = parseInt(draggableId);
         const draggedJob = jobs.find(j => j.id === draggedJobId);
 
@@ -117,6 +110,25 @@ function App() {
 
         // Update state
         editJob(draggedJobId, updatedJob);
+    };
+
+    // DRAWER STATE
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const [selectedJob, setSelectedJob] = useState(null);
+    const [drawerMode, setDrawerMode] = useState(false);
+    const handleEditClick = (jobId) => {
+        const jobToEdit = jobs.find(j => j.id === jobId);
+        setSelectedJob(jobToEdit);
+        setDrawerMode(true);
+        setIsDrawerOpen(true);
+    };
+    const handleViewClick = (job) => {
+        setSelectedJob(job);
+        setDrawerMode(false);
+        setIsDrawerOpen(true);
+    };
+    const handleDrawerSave = (id, updatedJob) => {
+        editJob(id, updatedJob);
     };
 
     return (
@@ -143,15 +155,32 @@ function App() {
                     {/* In Progress Apps */}
                     <CollapsibleSection title="In Progress Applications" defaultExpanded={true}>
                         <DragDropContext onDragEnd={handleDragEnd}>
-                            <InProgressApps jobs={jobs} onEdit={editJob} onDelete={deleteJob} />
+                            <InProgressApps
+                                jobs={jobs}
+                                onEdit={editJob}
+                                onDelete={deleteJob}
+                                onViewDetails={handleViewClick}
+                            />
                         </DragDropContext>
                     </CollapsibleSection>
 
                     {/* Table */}
                     <CollapsibleSection title="All Applications" defaultExpanded={true}>
-                        <JobTable jobs={jobs} onEdit={editJob} onDelete={deleteJob} />
+                        <JobTable
+                            jobs={jobs}
+                            onEdit={handleEditClick}
+                            onDelete={deleteJob}
+                        />
                     </CollapsibleSection>
                 </div>
+
+                <JobDetailDrawer
+                    isOpen={isDrawerOpen}
+                    onClose={() => setIsDrawerOpen(false)}
+                    job={selectedJob}
+                    onSave={handleDrawerSave}
+                    initialEditMode={drawerMode}
+                />
             </div>
 
 
