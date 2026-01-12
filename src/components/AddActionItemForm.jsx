@@ -37,7 +37,7 @@ function AddActionItemForm({ tasks, onAdd, onToggle, onDelete }) {
                         </span>
                         <button
                             onClick={() => onDelete(task.id)}
-                            className="btn btn-sm text-danger border-0 p-0 ms-2"
+                            className="btn btn-outline-danger btn-sm py-0 px-1"
                             title="Delete task"
                         >
                             &times;
@@ -56,7 +56,7 @@ function AddActionItemForm({ tasks, onAdd, onToggle, onDelete }) {
                     onKeyDown={handleKeyDown}
                 />
                 <button
-                    className="btn btn-outline-primary"
+                    className="btn btn-outline-secondary btn-sm py-0 px-1"
                     onClick={handleAdd}
                 >
                     +

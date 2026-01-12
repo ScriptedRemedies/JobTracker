@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import JobCard from './components/JobCard'
 import AddJobForm from './components/AddJobForm'
 import {confirmAction, notifySuccess} from "./utils/Toast.js";
 import StatusChart from "./components/StatusChart.jsx";
 import AddActionItemForm from "./components/AddActionItemForm.jsx";
 import JobTable from "./components/JobTable.jsx";
 import Goals from "./components/Goals.jsx";
+import InProgressApps from "./components/InProgressApps.jsx";
 
 function App() {
     // JOBS ITEMS
-    const STATUS_COLUMNS = ["Applied", "Interviewing", "Offered", "Rejected", "Ghosted"]
     const [jobs, setJobs] = useState(() => {
         const saved = localStorage.getItem('my-job-tracker')
         return saved ? JSON.parse(saved) : []
@@ -35,10 +34,6 @@ function App() {
     }
     const editJob = (id, updatedJob) => {
         setJobs(jobs.map((j) => (j.id === id ? updatedJob : j)))
-    }
-    const handleJobClick = (job) => {
-        console.log("Open Details for:", job.company)
-        // FUTURE: navigate('/job/' + job.id) or setIsModalOpen(true)
     }
 
     // TASK ITEMS
@@ -111,59 +106,24 @@ function App() {
                 {/* RIGHT CONTENT: The Job Board */}
                 <div className="col-md-9">
 
-                    {/* The Add Form (Kept at top for now) */}
+                    {/* Add Job Form */}
                     <div className="mb-4 bg-white p-3 rounded shadow-sm">
                         <AddJobForm onAdd={addJob} />
                     </div>
 
-                    <h4 className="mb-3">Applications in Progress</h4>
-
-                    {/* COLUMNS */}
-                    <div className="row g-3">
-                        {STATUS_COLUMNS.map(status => {
-                            // Filter jobs that belong to this column
-                            const jobsInColumn = jobs.filter(j => j.status === status)
-
-                            return (
-                                <div key={status} className="col-md-6 col-lg-3">
-                                    <div className="p-2 rounded" style={{ backgroundColor: '#e9ecef', minHeight: '100%' }}>
-                                        {/* Column Header */}
-                                        <h6 className="fw-bold text-uppercase text-secondary small mb-3 ps-1">
-                                            {status} <span className="badge bg-secondary rounded-pill">{jobsInColumn.length}</span>
-                                        </h6>
-
-                                        {/* Job Cards List */}
-                                        {jobsInColumn.length === 0 ? (
-                                            <p className="text-muted small text-center fst-italic">Empty</p>
-                                        ) : (
-                                            jobsInColumn.map(job => (
-                                                // Wrapper Div for "Click to Open Details"
-                                                <div
-                                                    key={job.id}
-                                                    onClick={() => handleJobClick(job)}
-                                                    style={{ cursor: 'pointer' }}
-                                                >
-                                                    <JobCard
-                                                        job={job}
-                                                        onEdit={editJob}
-                                                        onDelete={deleteJob}
-                                                    />
-                                                </div>
-                                            ))
-                                        )}
-                                    </div>
-                                </div>
-                            )
-                        })}
+                    {/* In Progress Apps */}
+                    <div className="mb-4 bg-white p-3 rounded shadow-sm">
+                        <InProgressApps jobs={jobs} onEdit={editJob} onDelete={deleteJob} />
                     </div>
 
+                    {/* Table */}
+                    <div className="mb-4 bg-white p-3 rounded shadow-sm">
+                        <JobTable jobs={jobs} onEdit={editJob} onDelete={deleteJob} />
+                    </div>
                 </div>
             </div>
 
-            {/* Table */}
-            <div className="w-100">
-                <JobTable jobs={jobs} onEdit={editJob} onDelete={deleteJob} />
-            </div>
+
         </div>
     )
 }

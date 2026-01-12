@@ -1,12 +1,11 @@
 import React from 'react'
-import {confirmAction, notifySuccess} from "../utils/Toast.js";
 
 function JobTable({ jobs, onEdit, onDelete}) {
     return (
         <div className="table-responsive">
-            <table className="table table-hover table-striped mt-3">
+            <table className="table table-hover table-striped mt-3 align-middle">
                 <thead>
-                    <tr>
+                    <tr className="text-nowrap">
                         <th scope="col">Position</th>
                         <th scope="col">Company</th>
                         <th scope="col">Location</th>
@@ -38,8 +37,16 @@ function JobTable({ jobs, onEdit, onDelete}) {
                             </td>
                             <td>{job.fitStatus}</td>
                             <td>{job.fitReason}</td>
-                            <td>{job.jobPostingLink}</td>
-                            <td>{job.jobAppPortalLink}</td>
+                            <td>
+                                {job.jobPostingLink && (
+                                    <a href={job.jobPostingLink} target="_blank" rel="noopener noreferrer">Link</a>
+                                )}
+                            </td>
+                            <td>
+                                {job.jobAppPortalLink && (
+                                    <a href={job.jobAppPortalLink} target="_blank" rel="noopener noreferrer">Link</a>
+                                )}
+                            </td>
                             <td>{job.status}</td>
                             <td>{job.dateApplied}</td>
                             <td>{job.appliedThrough}</td>
@@ -47,9 +54,23 @@ function JobTable({ jobs, onEdit, onDelete}) {
                             <td>{job.interviewDate}</td>
                             <td>{job.contact}</td>
                             <td>{job.notes}</td>
-                            <td className="d-flex justify-content-end gap-1">
-                                <button onClick={() => onEdit(job.id)} className="btn btn-outline-secondary btn-sm py-0 px-1">Edit</button>
-                                <button onClick={() => onDelete(job.id)} className="btn btn-outline-danger btn-sm py-0 px-1">&times;</button>
+                            <td>
+                                <div className="d-flex justify-content-center align-items-center gap-2">
+                                    <button
+                                        onClick={() => onEdit(job.id)}
+                                        className="btn btn-outline-secondary btn-sm py-0 px-1"
+                                        title="Edit"
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        onClick={() => onDelete(job.id)}
+                                        className="btn btn-outline-danger btn-sm py-0 px-1"
+                                        title="Delete"
+                                    >
+                                        &times;
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     ))}

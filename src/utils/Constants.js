@@ -1,3 +1,4 @@
+export const STATUS_COLUMNS = ["Applied", "Interviewing", "Offered", "Rejected", "Ghosted"]
 export const WORK_MODEL = ["Remote", "Hybrid", "On-Site"]
 export const STATUS = ["Not Applied", "Applied", "Interviewing", "Offered", "Rejected", "Ghosted"]
 export const FIT_STATUS = ['Would Prefer', 'Average', 'No Preference']
