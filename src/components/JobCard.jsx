@@ -1,17 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function JobCard({ job, onEdit, onDelete }) {
-    const [isEditing, setIsEditing] = useState(false);
-    const [editedJob, setEditedJob] = useState(job);
-
-    const handleSave = (e) => {
-        e.stopPropagation();
-        onEdit(job.id, editedJob);
-        setIsEditing(false);
-    };
-
-    // Helper to stop clicks from bubbling up
-    const stopProp = (e) => e.stopPropagation();
+function JobCard({ job }) {
 
     return (
         <div className="card mb-2 shadow-sm border-0">
