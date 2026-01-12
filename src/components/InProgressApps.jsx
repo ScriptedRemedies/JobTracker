@@ -1,6 +1,7 @@
 import React from 'react';
 import JobCard from "./JobCard.jsx";
 import { STATUS_COLUMNS } from "../utils/Constants"
+import {Draggable, Droppable} from "@hello-pangea/dnd";
 
 function InProgressApps({ jobs, onEdit, onDelete }) {
 
@@ -24,32 +25,60 @@ function InProgressApps({ jobs, onEdit, onDelete }) {
                             </h6>
 
                             {/* Horizontal Scroll Container */}
-                            <div
-                                className="d-flex flex-row flex-nowrap overflow-auto pb-2"
-                                style={{ gap: '15px' }} // Spacing between cards
-                            >
-                                {jobsInColumn.length === 0 ? (
-                                    <p className="text-muted small fst-italic ps-1">No applications in this stage.</p>
-                                ) : (
-                                    jobsInColumn.map(job => (
-                                        <div
-                                            key={job.id}
-                                            onClick={() => handleJobClick(job)}
-                                            style={{
-                                                cursor: 'pointer',
-                                                minWidth: '320px',
-                                                maxWidth: '320px'
-                                            }}
-                                        >
-                                            <JobCard
-                                                job={job}
-                                                onEdit={onEdit}
-                                                onDelete={onDelete}
-                                            />
-                                        </div>
-                                    ))
+                            <Droppable droppableId={status} direction="horizontal">
+                                {(provided, snapshot) => (
+                                    <div
+                                        ref={provided.innerRef}
+                                        {...provided.droppableProps}
+                                        className="d-flex flex-row flex-nowrap overflow-auto pb-2"
+                                        style={{
+                                            gap: '15px',
+                                            minHeight: '130px', // Ensure there is drop space even if empty
+                                            backgroundColor: snapshot.isDraggingOver ? '#f8f9fa' : 'transparent', // Highlight when dragging over
+                                            transition: 'background-color 0.2s ease'
+                                        }}
+                                    >
+                                        {jobsInColumn.length === 0 && !snapshot.isDraggingOver ? (
+                                            <p className="text-muted small fst-italic ps-1 align-self-center">No applications in this stage.</p>
+                                        ) : (
+                                            jobsInColumn.map((job, index) => (
+
+                                                /* 3. MAKE THE CARD DRAGGABLE */
+                                                <Draggable
+                                                    key={job.id}
+                                                    draggableId={job.id.toString()}
+                                                    index={index}
+                                                >
+                                                    {(provided, snapshot) => (
+                                                        <div
+                                                            ref={provided.innerRef}
+                                                            {...provided.draggableProps}
+                                                            {...provided.dragHandleProps}
+                                                            onClick={() => handleJobClick(job)}
+                                                            style={{
+                                                                cursor: 'grab',
+                                                                minWidth: '320px',
+                                                                maxWidth: '320px',
+                                                                // Combine library styles (transform) with your styles
+                                                                ...provided.draggableProps.style,
+                                                                opacity: snapshot.isDragging ? 0.8 : 1
+                                                            }}
+                                                        >
+                                                            <JobCard
+                                                                job={job}
+                                                                onEdit={onEdit}
+                                                                onDelete={onDelete}
+                                                            />
+                                                        </div>
+                                                    )}
+                                                </Draggable>
+                                            ))
+                                        )}
+                                        {/* Placeholder is required by the library to hold space while dragging */}
+                                        {provided.placeholder}
+                                    </div>
                                 )}
-                            </div>
+                            </Droppable>
                         </div>
                     )
                 })}

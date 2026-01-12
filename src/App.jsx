@@ -7,6 +7,7 @@ import JobTable from "./components/JobTable.jsx";
 import Goals from "./components/Goals.jsx";
 import InProgressApps from "./components/InProgressApps.jsx";
 import CollapsibleSection from "./components/CollapsibleSection.jsx";
+import { DragDropContext } from '@hello-pangea/dnd';
 
 function App() {
     // JOBS ITEMS
@@ -91,6 +92,33 @@ function App() {
         setGoals(newGoals)
     }
 
+    // DRAG FUNCTION
+    const handleDragEnd = (result) => {
+        const { source, destination, draggableId } = result;
+
+        // If dropped outside a valid list, do nothing
+        if (!destination) return;
+
+        // If dropped in the same place, do nothing
+        if (
+            source.droppableId === destination.droppableId &&
+            source.index === destination.index
+        ) {
+            return;
+        }
+
+        // Find the job that was dragged (draggableId should be the job ID)
+        // Note: draggableId is usually a string, so we might need to parse it if your IDs are numbers
+        const draggedJobId = parseInt(draggableId);
+        const draggedJob = jobs.find(j => j.id === draggedJobId);
+
+        // Update the status of the job to the new column ID (destination.droppableId)
+        const updatedJob = { ...draggedJob, status: destination.droppableId };
+
+        // Update state
+        editJob(draggedJobId, updatedJob);
+    };
+
     return (
         <div className="container-fluid bg-light min-vh-100 p-4">
 
@@ -114,7 +142,9 @@ function App() {
 
                     {/* In Progress Apps */}
                     <CollapsibleSection title="In Progress Applications" defaultExpanded={true}>
-                        <InProgressApps jobs={jobs} onEdit={editJob} onDelete={deleteJob} />
+                        <DragDropContext onDragEnd={handleDragEnd}>
+                            <InProgressApps jobs={jobs} onEdit={editJob} onDelete={deleteJob} />
+                        </DragDropContext>
                     </CollapsibleSection>
 
                     {/* Table */}
