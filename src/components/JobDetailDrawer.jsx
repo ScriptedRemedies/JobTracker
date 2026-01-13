@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {WORK_MODEL, STATUS, FIT_STATUS, STAGE, DELETE_BTN, SAVE_BTN} from '../utils/constants';
+import {WORK_MODEL, STATUS, FIT_STATUS, STAGE, DELETE_BTN, SAVE_BTN} from '../utils/Constants';
 import { notifySuccess, notifyError } from '../utils/Toast'; // Assuming you have a generic notify or notifyInfo
 
 function JobDetailDrawer({ isOpen, onClose, job, onSave, initialEditMode = false }) {

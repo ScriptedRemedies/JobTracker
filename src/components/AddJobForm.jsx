@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { notifySuccess, notifyError } from '../utils/Toast'
-import {WORK_MODEL, STATUS, FIT_STATUS, STAGE, SAVE_BTN} from '../utils/constants'
+import {WORK_MODEL, STATUS, FIT_STATUS, STAGE, SAVE_BTN} from '../utils/Constants'
 
 function AddJobForm({ onAdd }) {
 

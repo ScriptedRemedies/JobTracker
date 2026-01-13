@@ -1,5 +1,5 @@
 import React from 'react'
-import {DELETE_BTN, SAVE_BTN} from '../utils/constants'
+import {DELETE_BTN, SAVE_BTN} from '../utils/Constants'
 
 function JobTable({ jobs, onEdit, onDelete}) {
 
