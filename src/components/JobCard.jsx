@@ -23,7 +23,7 @@ function JobCard({ job }) {
                 {!job.salary ? (
                     <p className="card-text mb-2">Salary: Not Posted</p>
                 ) : (
-                    <p className="card-text mb-2">Salary: ${job.salary}</p>
+                    <p className="card-text mb-2">Salary: ${Number(job.salary).toLocaleString()}</p>
                 )}
 
                 {/* Applied Date */}

@@ -95,7 +95,7 @@ function JobDetailDrawer({ isOpen, onClose, job, onSave, initialEditMode = false
                                 {/* Work Model */}
                                 <div className="col-6"><p>Model: {formData.workModel}</p></div>
                                 {/* Salary */}
-                                <div className="col-6"><p>Salary: {formData.salary ? `$${formData.salary}` : 'Not Posted'}</p></div>
+                                <div className="col-6"><p>Salary: {formData.salary ? `$${Number(formData.salary).toLocaleString()}` : 'Not Posted'}</p></div>
                                 {/* Fit Status */}
                                 <div className="col-6"><p>Fit: {formData.fitStatus}</p></div>
                                 {/* Fit Reason */}

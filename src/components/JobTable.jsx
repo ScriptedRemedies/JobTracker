@@ -35,7 +35,7 @@ function JobTable({ jobs, onEdit, onDelete}) {
                             <td>{job.location}</td>
                             <td>{job.workModel}</td>
                             <td>
-                                {job.salary ? `$${job.salary}` : "Not Listed"}
+                                {job.salary ? `$${Number(job.salary).toLocaleString()}` : "Not Listed"}
                             </td>
                             <td>{job.fitStatus}</td>
                             <td>{job.fitReason}</td>
