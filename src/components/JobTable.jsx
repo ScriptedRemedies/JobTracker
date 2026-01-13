@@ -1,34 +1,7 @@
-import React, {useState} from 'react'
-import { WORK_MODEL, STATUS, FIT_STATUS, STAGE } from '../utils/constants'
+import React from 'react'
+import {DELETE_BTN, SAVE_BTN} from '../utils/constants'
 
 function JobTable({ jobs, onEdit, onDelete}) {
-    // STATE TO TRACK WHICH ROW IS BEING EDITED
-    const [editingId, setEditingId] = useState(null);
-    const [editFormData, setEditFormData] = useState({});
-
-    // START EDITING
-    const handleEditClick = (job) => {
-        setEditingId(job.id);
-        setEditFormData(job);
-    }
-
-    // CANCEL EDITING
-    const handleCancelClick = () => {
-        setEditingId(null);
-        setEditFormData({});
-    }
-
-    // HANDLE INPUT CHANGES
-    const handleEditFormChange = (e) => {
-        const { name, value } = e.target;
-        setEditFormData({ ...editFormData, [name]: value });
-    }
-
-    // SAVE CHANGES
-    const handleSaveClick = () => {
-        onEdit(editingId, editFormData);
-        setEditingId(null); // Exit edit mode
-    }
 
     return (
         <div className="table-responsive">
@@ -87,14 +60,14 @@ function JobTable({ jobs, onEdit, onDelete}) {
                                 <div className="d-flex justify-content-center align-items-center gap-2">
                                     <button
                                         onClick={() => onEdit(job.id)}
-                                        className="btn btn-outline-secondary btn-sm py-0 px-1"
+                                        className={SAVE_BTN}
                                         title="Edit"
                                     >
                                         Edit
                                     </button>
                                     <button
                                         onClick={() => onDelete(job.id)}
-                                        className="btn btn-outline-danger btn-sm py-0 px-1"
+                                        className={DELETE_BTN}
                                         title="Delete"
                                     >
                                         &times;

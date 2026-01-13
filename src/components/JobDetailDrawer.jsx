@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { WORK_MODEL, STATUS, FIT_STATUS, STAGE } from '../utils/constants';
+import {WORK_MODEL, STATUS, FIT_STATUS, STAGE, DELETE_BTN, SAVE_BTN} from '../utils/constants';
 import { notifySuccess, notifyError } from '../utils/Toast'; // Assuming you have a generic notify or notifyInfo
 
 function JobDetailDrawer({ isOpen, onClose, job, onSave, initialEditMode = false }) {
@@ -7,7 +7,6 @@ function JobDetailDrawer({ isOpen, onClose, job, onSave, initialEditMode = false
     const [formData, setFormData] = useState({});
     const [isEditing, setIsEditing] = useState(initialEditMode);
 
-    // Reset state when the drawer opens or the selected job changes
     useEffect(() => {
         if (job) {
             setFormData(job);
@@ -19,37 +18,42 @@ function JobDetailDrawer({ isOpen, onClose, job, onSave, initialEditMode = false
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-
     const handleSubmit = () => {
         onSave(formData.id, formData);
         notifySuccess('Changes Saved Successfully');
-        onClose();
+        setIsEditing(false);
+        setFormData(job);
     };
-
-    const handleCancelOrClose = () => {
-        // Only show "Not Saved" toast if we were actually editing
+    const handleCancelDrawer = () => {
         if (isEditing) {
             notifyError('Changes Not Saved', 'Edit cancelled.');
         }
         onClose();
     };
+    const handleCancelEdit = () => {
+        if (isEditing) {
+            notifyError('Changes Not Saved', 'Edit cancelled.');
+        }
+        setIsEditing(false);
+        setFormData(job);
+    }
 
     if (!isOpen) return null;
 
     return (
-        <>
+        <div>
             {/* BACKDROP */}
             <div
                 className="position-fixed top-0 start-0 w-100 h-100 bg-dark"
                 style={{ opacity: 0.5, zIndex: 1040 }}
-                onClick={handleCancelOrClose}
+                onClick={handleCancelDrawer}
             ></div>
 
             {/* DRAWER */}
             <div
                 className="position-fixed top-0 end-0 h-100 bg-white shadow-lg"
                 style={{
-                    width: '600px', // Made slightly wider to fit more data
+                    width: '600px',
                     maxWidth: '100%',
                     zIndex: 1050,
                     transform: isOpen ? 'translateX(0)' : 'translateX(100%)',
@@ -68,13 +72,13 @@ function JobDetailDrawer({ isOpen, onClose, job, onSave, initialEditMode = false
                             {/* Toggle Edit Mode Button (Only show in View Mode) */}
                             {!isEditing && (
                                 <button
-                                    className="btn btn-sm btn-outline-primary"
+                                    className={SAVE_BTN}
                                     onClick={() => setIsEditing(true)}
                                 >
                                     Edit Details
                                 </button>
                             )}
-                            <button onClick={handleCancelOrClose} className="btn btn-close"></button>
+                            <button onClick={handleCancelDrawer} className={DELETE_BTN}>&times;</button>
                         </div>
                     </div>
 
@@ -106,8 +110,8 @@ function JobDetailDrawer({ isOpen, onClose, job, onSave, initialEditMode = false
                             </div>
 
                             <div className="d-flex gap-3 mt-2">
-                                {formData.jobPostingLink && <a href={formData.jobPostingLink} target="_blank" rel="noreferrer" className="btn btn-sm btn-outline-secondary">Job Posting</a>}
-                                {formData.jobAppPortalLink && <a href={formData.jobAppPortalLink} target="_blank" rel="noreferrer" className="btn btn-sm btn-outline-secondary">Job Portal</a>}
+                                {formData.jobPostingLink && <a href={formData.jobPostingLink} target="_blank" rel="noreferrer" className={SAVE_BTN}>Job Posting</a>}
+                                {formData.jobAppPortalLink && <a href={formData.jobAppPortalLink} target="_blank" rel="noreferrer" className={SAVE_BTN}>Job Portal</a>}
                             </div>
 
                             <div className="bg-light p-3 rounded mt-2">
@@ -117,7 +121,7 @@ function JobDetailDrawer({ isOpen, onClose, job, onSave, initialEditMode = false
                         </div>
                     ) : (
 
-                        /* --- EDIT MODE (FORM) --- */
+                        /* EDIT MODE */
                         <div className="row g-3">
                             {/* Position & Company */}
                             <div className="col-6">
@@ -210,15 +214,15 @@ function JobDetailDrawer({ isOpen, onClose, job, onSave, initialEditMode = false
                             {/* Action Buttons */}
                             <div className="col-12 mt-4">
                                 <div className="d-grid gap-2">
-                                    <button onClick={handleSubmit} className="btn btn-primary">Save Changes</button>
-                                    <button onClick={handleCancelOrClose} className="btn btn-outline-secondary">Cancel</button>
+                                    <button onClick={handleSubmit} className={SAVE_BTN}>Save Changes</button>
+                                    <button onClick={handleCancelEdit} className={DELETE_BTN}>Cancel</button>
                                 </div>
                             </div>
                         </div>
                     )}
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 

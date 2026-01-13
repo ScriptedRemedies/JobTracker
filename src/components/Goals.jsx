@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { notifySuccess } from "../utils/Toast.js";
-import { WORK_MODEL } from "../utils/constants.js";
+import {SAVE_BTN, WORK_MODEL} from "../utils/constants.js";
 
 function Goals({ onUpdate, initialData }) {
 
@@ -56,7 +56,7 @@ function Goals({ onUpdate, initialData }) {
 
             {/* Submit Button */}
             <div className="mt-4 text-end">
-                <button onClick={handleSubmit} className="btn btn-outline-secondary btn-sm">
+                <button onClick={handleSubmit} className={SAVE_BTN}>
                     Save Goals
                 </button>
             </div>

@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { notifySuccess, notifyError } from '../utils/Toast'
+import {DELETE_BTN, SAVE_BTN} from "../utils/Constants.js";
 
 function AddActionItemForm({ tasks, onAdd, onToggle, onDelete }) {
     const [newItem, setNewItem] = useState('')
@@ -37,7 +38,7 @@ function AddActionItemForm({ tasks, onAdd, onToggle, onDelete }) {
                         </span>
                         <button
                             onClick={() => onDelete(task.id)}
-                            className="btn btn-outline-danger btn-sm py-0 px-1"
+                            className={DELETE_BTN}
                             title="Delete task"
                         >
                             &times;
@@ -56,7 +57,7 @@ function AddActionItemForm({ tasks, onAdd, onToggle, onDelete }) {
                     onKeyDown={handleKeyDown}
                 />
                 <button
-                    className="btn btn-outline-secondary btn-sm py-0 px-1"
+                    className={SAVE_BTN}
                     onClick={handleAdd}
                 >
                     +

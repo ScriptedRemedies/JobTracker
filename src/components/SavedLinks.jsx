@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {notifyError, notifySuccess} from "../utils/Toast.js";
+import {DELETE_BTN, SAVE_BTN} from "../utils/Constants.js";
 
 function SavedLinks({ links, onAdd, onEdit, onDelete }) {
     const [formState, setFormState] = useState({
@@ -88,13 +89,13 @@ function SavedLinks({ links, onAdd, onEdit, onDelete }) {
                                     <div className="d-flex justify-content-end gap-2">
                                         <button
                                             onClick={handleSaveEdit}
-                                            className="btn btn-outline-secondary btn-sm py-0 px-1"
+                                            className={SAVE_BTN}
                                         >
                                             Save
                                         </button>
                                         <button
                                             onClick={handleCancelEdit}
-                                            className="btn btn-outline-danger btn-sm py-0 px-1"
+                                            className={DELETE_BTN}
                                         >
                                             Cancel
                                         </button>
@@ -110,14 +111,14 @@ function SavedLinks({ links, onAdd, onEdit, onDelete }) {
                                     <div className="d-flex gap-2">
                                         <button
                                             onClick={() => handleEditClick(link)}
-                                            className="btn btn-outline-secondary btn-sm py-0 px-1"
+                                            className={SAVE_BTN}
                                             title="Edit"
                                         >
                                             Edit
                                         </button>
                                         <button
                                             onClick={() => onDelete(link.id)}
-                                            className="btn btn-outline-danger btn-sm py-0 px-1"
+                                            className={DELETE_BTN}
                                             title="Delete"
                                         >
                                             &times;
@@ -150,7 +151,7 @@ function SavedLinks({ links, onAdd, onEdit, onDelete }) {
                         onChange={handleChange}
                     />
                     <button
-                        className="btn btn-outline-secondary btn-sm py-0 px-1"
+                        className={SAVE_BTN}
                         onClick={handleAdd}
                     >
                         Add Link

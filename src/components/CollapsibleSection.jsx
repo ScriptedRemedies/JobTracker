@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {SAVE_BTN} from "../utils/Constants.js";
 
 const CollapsibleSection = ({ title, children, defaultExpanded }) => {
     const [isExpanded, setIsExpanded] = useState(defaultExpanded);
@@ -13,7 +14,7 @@ const CollapsibleSection = ({ title, children, defaultExpanded }) => {
                 onClick={() => setIsExpanded(!isExpanded)}
             >
                 <h3 className="m-0">{title}</h3>
-                <button className="btn btn-sm btn-outline-secondary border-0">
+                <button className={SAVE_BTN}>
                     {isExpanded ? (
                         /* Up Arrow (Chevron) */
                         <i className="bi bi-chevron-up">▲</i>

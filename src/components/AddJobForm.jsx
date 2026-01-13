@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { notifySuccess, notifyError } from '../utils/Toast'
-import { WORK_MODEL, STATUS, FIT_STATUS, STAGE } from '../utils/constants'
+import {WORK_MODEL, STATUS, FIT_STATUS, STAGE, SAVE_BTN} from '../utils/constants'
 
 function AddJobForm({ onAdd }) {
 
@@ -185,7 +185,7 @@ function AddJobForm({ onAdd }) {
 
                 {/* Add Button */}
                 <div className="col-12 mt-4 text-end">
-                    <button onClick={handleSubmit} className="btn btn-outline-secondary btn-sm">
+                    <button onClick={handleSubmit} className={SAVE_BTN}>
                         Add Job Application
                     </button>
                 </div>
