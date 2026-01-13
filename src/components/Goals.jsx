@@ -22,7 +22,7 @@ function Goals({ onUpdate, initialData }) {
     return (
         <div className="card p-3 mt-3 shadow-sm">
             <h6 className="fw-bold mb-3">Goals</h6>
-            <p>*All fields optional.*</p>
+            <p className="text-muted small fst-italic">All fields optional.</p>
 
             {/* Position */}
             <div className="row mb-3">
