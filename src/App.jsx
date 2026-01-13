@@ -9,6 +9,7 @@ import InProgressApps from "./components/InProgressApps.jsx";
 import CollapsibleSection from "./components/CollapsibleSection.jsx";
 import { DragDropContext } from '@hello-pangea/dnd';
 import JobDetailDrawer from "./components/JobDetailDrawer.jsx";
+import SavedLinks from "./components/SavedLinks.jsx";
 
 function App() {
     // JOBS ITEMS
@@ -36,6 +37,30 @@ function App() {
     const editJob = (id, updatedJob) => {
         setJobs(jobs.map((j) => (j.id === id ? updatedJob : j)))
     }
+    // DRAG FUNCTION (for cards)
+    const handleDragEnd = (result) => {
+        const { source, destination, draggableId } = result;
+
+        if (!destination) return;
+
+        // If dropped in the same place, do nothing
+        if (
+            source.droppableId === destination.droppableId &&
+            source.index === destination.index
+        ) {
+            return;
+        }
+
+        // Find the job that was dragged (draggableId should be the job ID)
+        const draggedJobId = parseInt(draggableId);
+        const draggedJob = jobs.find(j => j.id === draggedJobId);
+
+        // Update the status of the job to the new column ID (destination.droppableId)
+        const updatedJob = { ...draggedJob, status: destination.droppableId };
+
+        // Update state
+        editJob(draggedJobId, updatedJob);
+    };
 
     // TASK ITEMS
     const [tasks, setTasks] = useState(() => {
@@ -87,30 +112,31 @@ function App() {
         setGoals(newGoals)
     }
 
-    // DRAG FUNCTION
-    const handleDragEnd = (result) => {
-        const { source, destination, draggableId } = result;
-
-        if (!destination) return;
-
-        // If dropped in the same place, do nothing
-        if (
-            source.droppableId === destination.droppableId &&
-            source.index === destination.index
-        ) {
-            return;
+    // PLATFORM LINKS
+    const [links, setLinks] = useState(() => {
+        const savedLinks = localStorage.getItem('my-links')
+        return savedLinks ? JSON.parse(savedLinks) : []
+    })
+    useEffect(() => {
+        localStorage.setItem('my-links', JSON.stringify(links))
+    }, [links])
+    const addLink = (linkData) => {
+        const newLink = {
+            id: Date.now(),
+            ...linkData
         }
-
-        // Find the job that was dragged (draggableId should be the job ID)
-        const draggedJobId = parseInt(draggableId);
-        const draggedJob = jobs.find(j => j.id === draggedJobId);
-
-        // Update the status of the job to the new column ID (destination.droppableId)
-        const updatedJob = { ...draggedJob, status: destination.droppableId };
-
-        // Update state
-        editJob(draggedJobId, updatedJob);
-    };
+        setLinks([...links, newLink])
+    }
+    const deleteLink = async (id) => {
+        const result = await confirmAction('Do you want to delete this Link?')
+        if (result.isConfirmed) {
+            setLinks(links.filter(l => l.id !== id))
+            notifySuccess('Link Deleted')
+        }
+    }
+    const editLink = (id, updatedLink) => {
+        setLinks(links.map((l) => (l.id === id ? updatedLink : l)))
+    }
 
     // DRAWER STATE
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -140,8 +166,9 @@ function App() {
                 {/* LEFT SIDEBAR: Chart, Stats, Goals */}
                 <div className="col-md-3 mb-4">
                     <StatusChart jobs={jobs} />
-                    <AddActionItemForm tasks={tasks} onAdd={addTask} onToggle={toggleTask} onDelete={deleteTask} />
                     <Goals onUpdate={updateGoals} initialData={goals} />
+                    <AddActionItemForm tasks={tasks} onAdd={addTask} onToggle={toggleTask} onDelete={deleteTask} />
+                    <SavedLinks links={links} onAdd={addLink} onEdit={editLink} onDelete={deleteLink} />
                 </div>
 
                 {/* RIGHT CONTENT: The Job Board */}
