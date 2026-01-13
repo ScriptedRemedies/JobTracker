@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { notifySuccess } from "../utils/Toast.js";
-import {SAVE_BTN, WORK_MODEL} from "../utils/Constants.js";
+import {FORM_LABEL, INPUT_FIELD, SAVE_BTN, SELECT_FIELD, SIDEBAR_COMPONENTS, WORK_MODEL} from "../utils/Constants.js";
 
 function Goals({ onUpdate, initialData }) {
 
@@ -20,33 +20,33 @@ function Goals({ onUpdate, initialData }) {
     }
 
     return (
-        <div className="card p-3 mt-3 shadow-sm">
+        <div className={SIDEBAR_COMPONENTS}>
             <h6 className="fw-bold mb-3">Goals</h6>
             <p className="text-muted small fst-italic">All fields optional.</p>
 
             {/* Position */}
             <div className="row mb-3">
-                <label className="form-label fw-bold">Position Title</label>
+                <label className={FORM_LABEL}>Position Title</label>
                 <input name="position" type="text" value={formState.position} onChange={handleChange}/>
             </div>
 
             {/* Work Model */}
             <div className="row mb-3">
-                <label className="form-label fw-bold">Work Model</label>
-                <select name="workModel" className="form-select" value={formState.workModel} onChange={handleChange}>
+                <label className={FORM_LABEL}>Work Model</label>
+                <select name="workModel" className={SELECT_FIELD} value={formState.workModel} onChange={handleChange}>
                     {WORK_MODEL.map(model => <option key={model} value={model}>{model}</option>)}
                 </select>
             </div>
 
             {/* Salary */}
             <div className="row mb-3">
-                <label className="form-label fw-bold">Salary</label>
+                <label className={FORM_LABEL}>Salary</label>
                 <div className="input-group">
                     <span className="input-group-text">$</span>
                     <input
                         name="salary"
                         type="number"
-                        className="form-control"
+                        className={INPUT_FIELD}
                         value={formState.salary}
                         onChange={handleChange}
                         placeholder="e.g. 65000"

@@ -1,9 +1,10 @@
 import React from 'react';
+import {BADGE_STYLE, CARD_STYLE} from "../utils/Constants.js";
 
 function JobCard({ job }) {
 
     return (
-        <div className="card mb-2 shadow-sm border-0">
+        <div className={CARD_STYLE}>
             <div className="card-body p-2">
                 {/* Position Header & Company */}
                 <h6 className="card-title mb-0 fw-bold">{job.position}</h6>
@@ -11,11 +12,11 @@ function JobCard({ job }) {
 
                 {/* Badges */}
                 <div className="d-flex gap-2">
-                    <span className="badge bg-light text-dark border mb-1">{job.workModel}</span>
-                    <span className="badge bg-light text-dark border mb-1">{job.fitStatus}</span>
-                    <span className="badge bg-light text-dark border mb-1">{job.fitStatus}</span>
+                    <span className={BADGE_STYLE}>{job.workModel}</span>
+                    <span className={BADGE_STYLE}>{job.fitStatus}</span>
+                    <span className={BADGE_STYLE}>{job.fitStatus}</span>
                     {job.status === "Interviewing" && (
-                        <span className="badge bg-light text-dark border mb-1">{job.stage}</span>
+                        <span className={BADGE_STYLE}>{job.stage}</span>
                     )}
                 </div>
 

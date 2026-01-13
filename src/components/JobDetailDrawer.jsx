@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import {WORK_MODEL, STATUS, FIT_STATUS, STAGE, DELETE_BTN, SAVE_BTN} from '../utils/Constants';
+import {
+    WORK_MODEL,
+    STATUS,
+    FIT_STATUS,
+    STAGE,
+    DELETE_BTN,
+    SAVE_BTN,
+    BTN_CONTAINER,
+    FORM_LABEL_SMALL, INPUT_FIELD, SELECT_FIELD, FLEX_BETWEEN_CENTER
+} from '../utils/Constants';
 import { notifySuccess, notifyError } from '../utils/Toast'; // Assuming you have a generic notify or notifyInfo
 
 function JobDetailDrawer({ isOpen, onClose, job, onSave, initialEditMode = false }) {
@@ -64,7 +73,7 @@ function JobDetailDrawer({ isOpen, onClose, job, onSave, initialEditMode = false
                 <div className="p-4">
 
                     {/* Header */}
-                    <div className="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
+                    <div className={`${FLEX_BETWEEN_CENTER} mb-4 border-bottom pb-2`}>
                         <h4 className="m-0">
                             {isEditing ? 'Edit Application' : 'Application Details'}
                         </h4>
@@ -131,95 +140,95 @@ function JobDetailDrawer({ isOpen, onClose, job, onSave, initialEditMode = false
                         <div className="row g-3">
                             {/* Position & Company */}
                             <div className="col-6">
-                                <label className="form-label fw-bold small">Position</label>
-                                <input name="position" className="form-control" value={formData.position || ''} onChange={handleChange} />
+                                <label className={FORM_LABEL_SMALL}>Position</label>
+                                <input name="position" className={INPUT_FIELD} value={formData.position || ''} onChange={handleChange} />
                             </div>
                             <div className="col-6">
-                                <label className="form-label fw-bold small">Company</label>
-                                <input name="company" className="form-control" value={formData.company || ''} onChange={handleChange} />
+                                <label className={FORM_LABEL_SMALL}>Company</label>
+                                <input name="company" className={INPUT_FIELD} value={formData.company || ''} onChange={handleChange} />
                             </div>
 
                             {/* Location & Work Model */}
                             <div className="col-6">
-                                <label className="form-label fw-bold small">Location</label>
-                                <input name="location" className="form-control" value={formData.location || ''} onChange={handleChange} />
+                                <label className={FORM_LABEL_SMALL}>Location</label>
+                                <input name="location" className={INPUT_FIELD} value={formData.location || ''} onChange={handleChange} />
                             </div>
                             <div className="col-6">
-                                <label className="form-label fw-bold small">Work Model</label>
-                                <select name="workModel" className="form-select" value={formData.workModel || ''} onChange={handleChange}>
+                                <label className={FORM_LABEL_SMALL}>Work Model</label>
+                                <select name="workModel" className={SELECT_FIELD} value={formData.workModel || ''} onChange={handleChange}>
                                     {WORK_MODEL.map(m => <option key={m} value={m}>{m}</option>)}
                                 </select>
                             </div>
 
                             {/* Salary & Fit */}
                             <div className="col-4">
-                                <label className="form-label fw-bold small">Salary</label>
-                                <input name="salary" type="number" className="form-control" value={formData.salary || ''} onChange={handleChange} />
+                                <label className={FORM_LABEL_SMALL}>Salary</label>
+                                <input name="salary" type="number" className={INPUT_FIELD} value={formData.salary || ''} onChange={handleChange} />
                             </div>
                             <div className="col-4">
-                                <label className="form-label fw-bold small">Fit Status</label>
-                                <select name="fitStatus" className="form-select" value={formData.fitStatus || ''} onChange={handleChange}>
+                                <label className={FORM_LABEL_SMALL}>Fit Status</label>
+                                <select name="fitStatus" className={SELECT_FIELD} value={formData.fitStatus || ''} onChange={handleChange}>
                                     {FIT_STATUS.map(s => <option key={s} value={s}>{s}</option>)}
                                 </select>
                             </div>
                             <div className="col-4">
-                                <label className="form-label fw-bold small">Fit Reason</label>
-                                <input name="fitReason" type="text" className="form-control" value={formData.fitReason || ''} onChange={handleChange} />
+                                <label className={FORM_LABEL_SMALL}>Fit Reason</label>
+                                <input name="fitReason" type="text" className={INPUT_FIELD} value={formData.fitReason || ''} onChange={handleChange} />
                             </div>
 
                             {/* Status & Stage */}
                             <div className="col-6">
-                                <label className="form-label fw-bold small">Status</label>
-                                <select name="status" className="form-select" value={formData.status || ''} onChange={handleChange}>
+                                <label className={FORM_LABEL_SMALL}>Status</label>
+                                <select name="status" className={SELECT_FIELD} value={formData.status || ''} onChange={handleChange}>
                                     {STATUS.map(s => <option key={s} value={s}>{s}</option>)}
                                 </select>
                             </div>
                             <div className="col-6">
-                                <label className="form-label fw-bold small">Stage</label>
-                                <select name="stage" className="form-select" value={formData.stage || ''} onChange={handleChange}>
+                                <label className={FORM_LABEL_SMALL}>Stage</label>
+                                <select name="stage" className={SELECT_FIELD} value={formData.stage || ''} onChange={handleChange}>
                                     {STAGE.map(s => <option key={s} value={s}>{s}</option>)}
                                 </select>
                             </div>
 
                             {/* Dates */}
                             <div className="col-6">
-                                <label className="form-label fw-bold small">Date Applied</label>
-                                <input name="dateApplied" type="date" className="form-control" value={formData.dateApplied || ''} onChange={handleChange} />
+                                <label className={FORM_LABEL_SMALL}>Date Applied</label>
+                                <input name="dateApplied" type="date" className={INPUT_FIELD} value={formData.dateApplied || ''} onChange={handleChange} />
                             </div>
                             <div className="col-6">
-                                <label className="form-label fw-bold small">Interview Date</label>
-                                <input name="interviewDate" type="date" className="form-control" value={formData.interviewDate || ''} onChange={handleChange} />
+                                <label className={FORM_LABEL_SMALL}>Interview Date</label>
+                                <input name="interviewDate" type="date" className={INPUT_FIELD} value={formData.interviewDate || ''} onChange={handleChange} />
                             </div>
 
                             {/* Contact & Portal */}
                             <div className="col-6">
-                                <label className="form-label fw-bold small">Applied Through</label>
-                                <input name="appliedThrough" className="form-control" value={formData.appliedThrough || ''} onChange={handleChange} />
+                                <label className={FORM_LABEL_SMALL}>Applied Through</label>
+                                <input name="appliedThrough" className={INPUT_FIELD} value={formData.appliedThrough || ''} onChange={handleChange} />
                             </div>
                             <div className="col-6">
-                                <label className="form-label fw-bold small">Contact Info</label>
-                                <input name="contact" className="form-control" value={formData.contact || ''} onChange={handleChange} />
+                                <label className={FORM_LABEL_SMALL}>Contact Info</label>
+                                <input name="contact" className={INPUT_FIELD} value={formData.contact || ''} onChange={handleChange} />
                             </div>
 
                             {/* Links */}
                             <div className="col-12">
-                                <label className="form-label fw-bold small">Job Posting URL</label>
-                                <input name="jobPostingLink" className="form-control" value={formData.jobPostingLink || ''} onChange={handleChange} />
+                                <label className={FORM_LABEL_SMALL}>Job Posting URL</label>
+                                <input name="jobPostingLink" className={INPUT_FIELD} value={formData.jobPostingLink || ''} onChange={handleChange} />
                             </div>
                             <div className="col-12">
-                                <label className="form-label fw-bold small">Job Portal URL</label>
-                                <input name="jobAppPortalLink" className="form-control" value={formData.jobAppPortalLink || ''} onChange={handleChange} />
+                                <label className={FORM_LABEL_SMALL}>Job Portal URL</label>
+                                <input name="jobAppPortalLink" className={INPUT_FIELD} value={formData.jobAppPortalLink || ''} onChange={handleChange} />
                             </div>
 
                             {/* Notes */}
                             <div className="col-12">
-                                <label className="form-label fw-bold small">Notes</label>
-                                <textarea name="notes" className="form-control" rows="5" value={formData.notes || ''} onChange={handleChange} />
+                                <label className={FORM_LABEL_SMALL}>Notes</label>
+                                <textarea name="notes" className={INPUT_FIELD} rows="5" value={formData.notes || ''} onChange={handleChange} />
                             </div>
 
                             {/* Action Buttons */}
                             <div className="col-12 mt-4">
-                                <div className="d-grid gap-2">
+                                <div className={BTN_CONTAINER}>
                                     <button onClick={handleSubmit} className={SAVE_BTN}>Save Changes</button>
                                     <button onClick={handleCancelEdit} className={DELETE_BTN}>Cancel</button>
                                 </div>

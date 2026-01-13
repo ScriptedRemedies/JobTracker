@@ -91,6 +91,9 @@ function App() {
 
         setTasks(tasks.map(t => t.id === taskId ? {...t, completed: !task.completed } : t))
     }
+    const editTask = (id, updatedTask) => {
+        setTasks(tasks.map((t) => (t.id === id ? updatedTask : t)))
+    }
     const deleteTask = async (taskId) => {
         const result = await confirmAction('Do you want to delete this Action Item?')
         if (result.isConfirmed) {
@@ -167,7 +170,7 @@ function App() {
                 <div className="col-md-3 mb-4">
                     <StatusChart jobs={jobs} />
                     <Goals onUpdate={updateGoals} initialData={goals} />
-                    <AddActionItemForm tasks={tasks} onAdd={addTask} onToggle={toggleTask} onDelete={deleteTask} />
+                    <AddActionItemForm tasks={tasks} onAdd={addTask} onToggle={toggleTask} onEdit={editTask} onDelete={deleteTask} />
                     <SavedLinks links={links} onAdd={addLink} onEdit={editLink} onDelete={deleteLink} />
                 </div>
 

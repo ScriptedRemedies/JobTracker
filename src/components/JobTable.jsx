@@ -1,5 +1,5 @@
 import React from 'react'
-import {DELETE_BTN, SAVE_BTN} from '../utils/Constants'
+import {BTN_CONTAINER, DELETE_BTN, SAVE_BTN} from '../utils/Constants'
 
 function JobTable({ jobs, onEdit, onDelete}) {
 
@@ -57,7 +57,7 @@ function JobTable({ jobs, onEdit, onDelete}) {
                             <td>{job.contact}</td>
                             <td>{job.notes}</td>
                             <td>
-                                <div className="d-flex justify-content-center align-items-center gap-2">
+                                <div className={BTN_CONTAINER}>
                                     <button
                                         onClick={() => onEdit(job.id)}
                                         className={SAVE_BTN}

@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {notifyError, notifySuccess} from "../utils/Toast.js";
-import {DELETE_BTN, SAVE_BTN} from "../utils/Constants.js";
+import {DELETE_BTN, INPUT_SM, SAVE_BTN, SIDEBAR_COMPONENTS} from "../utils/Constants.js";
 
 function SavedLinks({ links, onAdd, onEdit, onDelete }) {
     const [formState, setFormState] = useState({
@@ -48,7 +48,7 @@ function SavedLinks({ links, onAdd, onEdit, onDelete }) {
     }
 
     return (
-        <div className="card p-3 mt-3 shadow-sm">
+        <div className={SIDEBAR_COMPONENTS}>
             <h6 className="fw-bold mb-3">Saved Links</h6>
 
             <ul className="list-unstyled mb-3">
@@ -67,7 +67,7 @@ function SavedLinks({ links, onAdd, onEdit, onDelete }) {
                                         <input
                                             type="text"
                                             name="title"
-                                            className="form-control form-control-sm"
+                                            className={INPUT_SM}
                                             value={editForm.title}
                                             onChange={handleEditChange}
                                         />
@@ -79,7 +79,7 @@ function SavedLinks({ links, onAdd, onEdit, onDelete }) {
                                         <input
                                             type="text"
                                             name="link"
-                                            className="form-control form-control-sm"
+                                            className={INPUT_SM}
                                             value={editForm.link}
                                             onChange={handleEditChange}
                                         />
@@ -137,7 +137,7 @@ function SavedLinks({ links, onAdd, onEdit, onDelete }) {
                     <input
                         type="text"
                         name="title"
-                        className="form-control form-control-sm"
+                        className={INPUT_SM}
                         placeholder="Title"
                         value={formState.title}
                         onChange={handleChange}
@@ -145,7 +145,7 @@ function SavedLinks({ links, onAdd, onEdit, onDelete }) {
                     <input
                         type="text"
                         name="link"
-                        className="form-control form-control-sm"
+                        className={INPUT_SM}
                         placeholder="https://..."
                         value={formState.link}
                         onChange={handleChange}

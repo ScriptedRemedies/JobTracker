@@ -1,6 +1,7 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import {SIDEBAR_COMPONENTS} from "../utils/Constants.js";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -33,7 +34,7 @@ function StatusChart({ jobs }) {
     };
 
     return (
-        <div className="card p-3 shadow-sm">
+        <div className={SIDEBAR_COMPONENTS}>
             <h5 className="text-center mb-3">Application Overview</h5>
             <div style={{ position: 'relative', height: '200px', width: '100%' }}>
                 <Doughnut

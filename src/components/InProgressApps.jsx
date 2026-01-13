@@ -1,6 +1,6 @@
 import React from 'react';
 import JobCard from "./JobCard.jsx";
-import { STATUS_COLUMNS } from "../utils/Constants"
+import {COLUMN_HEADER, STATUS_COLUMNS} from "../utils/Constants"
 import {Draggable, Droppable} from "@hello-pangea/dnd";
 
 function InProgressApps({ jobs, onEdit, onDelete, onViewDetails }) {
@@ -19,7 +19,7 @@ function InProgressApps({ jobs, onEdit, onDelete, onViewDetails }) {
                         <div key={status} className="w-100">
 
                             {/* Category Header */}
-                            <h6 className="fw-bold text-uppercase text-secondary small mb-2 border-bottom pb-1">
+                            <h6 className={COLUMN_HEADER}>
                                 {status} <span className="badge bg-secondary rounded-pill ms-1">{jobsInColumn.length}</span>
                             </h6>
 
@@ -32,8 +32,8 @@ function InProgressApps({ jobs, onEdit, onDelete, onViewDetails }) {
                                         className="d-flex flex-row flex-nowrap overflow-auto pb-2"
                                         style={{
                                             gap: '15px',
-                                            minHeight: '130px', // Ensure there is drop space even if empty
-                                            backgroundColor: snapshot.isDraggingOver ? '#f8f9fa' : 'transparent', // Highlight when dragging over
+                                            minHeight: '130px',
+                                            backgroundColor: snapshot.isDraggingOver ? '#f8f9fa' : 'transparent',
                                             transition: 'background-color 0.2s ease'
                                         }}
                                     >
@@ -42,7 +42,6 @@ function InProgressApps({ jobs, onEdit, onDelete, onViewDetails }) {
                                         ) : (
                                             jobsInColumn.map((job, index) => (
 
-                                                /* 3. MAKE THE CARD DRAGGABLE */
                                                 <Draggable
                                                     key={job.id}
                                                     draggableId={job.id.toString()}
@@ -72,7 +71,6 @@ function InProgressApps({ jobs, onEdit, onDelete, onViewDetails }) {
                                                 </Draggable>
                                             ))
                                         )}
-                                        {/* Placeholder is required by the library to hold space while dragging */}
                                         {provided.placeholder}
                                     </div>
                                 )}

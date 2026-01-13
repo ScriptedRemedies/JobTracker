@@ -1,9 +1,12 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { notifySuccess, notifyError } from '../utils/Toast'
-import {DELETE_BTN, SAVE_BTN} from "../utils/Constants.js";
+import {BTN_CONTAINER, DELETE_BTN, INPUT_SM, SAVE_BTN, SIDEBAR_COMPONENTS} from "../utils/Constants.js";
 
-function AddActionItemForm({ tasks, onAdd, onToggle, onDelete }) {
+function AddActionItemForm({ tasks, onAdd, onToggle, onEdit, onDelete }) {
+
     const [newItem, setNewItem] = useState('')
+    const [editingId, setEditingId] = useState(null);
+    const [editText, setEditText] = useState('');
 
     const handleAdd = () => {
         if (!newItem.trim()) {
@@ -15,36 +18,94 @@ function AddActionItemForm({ tasks, onAdd, onToggle, onDelete }) {
         notifySuccess('Action Item Added!')
     }
     const handleKeyDown = (e) => {
-        if (e.key === 'Enter') {
-            handleAdd()
+        if (e.key === 'Enter') handleAdd()
+    }
+    const handleEditClick = (task) => {
+        setEditingId(task.id);
+        setEditText(task.text);
+    }
+    const handleSaveEdit = () => {
+        if (!editText.trim()) {
+            notifyError('Error', 'Task cannot be empty.');
+            return;
         }
+        onEdit(editingId, { id: editingId, text: editText, completed: false });
+
+        notifySuccess('Action Item Updated!');
+        setEditingId(null);
+    }
+    const handleCancelEdit = () => {
+        setEditingId(null);
     }
 
     return (
-        <div className="card p-3 mt-3 shadow-sm">
+        <div className={SIDEBAR_COMPONENTS}>
             <h6 className="fw-bold mb-3">Action Items</h6>
+
             <ul className="list-unstyled mb-3">
                 {tasks.length === 0 && <li className="text-muted small fst-italic">No Active Tasks</li>}
 
-                {tasks.map((task) => (
-                    <li key={task.id} className="d-flex align-items-center mb-2">
-                        <input type="checkbox" className="form-check-input me-2" checked={task.completed} onChange={() => onToggle(task.id)} />
-                        <span style={{
-                            textDecoration: task.completed ? 'line-through' : 'none',
-                            color: task.completed ? '#aaa' : 'inherit',
-                            flex: 1
-                        }}>
-                            {task.text}
-                        </span>
-                        <button
-                            onClick={() => onDelete(task.id)}
-                            className={DELETE_BTN}
-                            title="Delete task"
-                        >
-                            &times;
-                        </button>
-                    </li>
-                ))}
+                {tasks.map((task) => {
+
+                    const isEditing = editingId === task.id;
+
+                    return (
+                        <li key={task.id} className="d-flex align-items-center mb-2">
+
+                            {isEditing ? (
+                                <div className="d-flex w-100 gap-2">
+                                    <input
+                                        type="text"
+                                        className={INPUT_SM}
+                                        value={editText}
+                                        onChange={(e) => setEditText(e.target.value)}
+                                        autoFocus
+                                    />
+                                    <button onClick={handleSaveEdit} className={SAVE_BTN}>
+                                        Save
+                                    </button>
+                                    <button onClick={handleCancelEdit} className={DELETE_BTN}>
+                                        &times;
+                                    </button>
+                                </div>
+                            ) : (
+                                <>
+                                    <input
+                                        type="checkbox"
+                                        className="form-check-input me-2"
+                                        checked={task.completed}
+                                        onChange={() => onToggle(task.id)}
+                                    />
+
+                                    <span style={{
+                                        textDecoration: task.completed ? 'line-through' : 'none',
+                                        color: task.completed ? '#aaa' : 'inherit',
+                                        flex: 1
+                                    }}>
+                                        {task.text}
+                                    </span>
+
+                                    <div className={BTN_CONTAINER}>
+                                        <button
+                                            onClick={() => handleEditClick(task)}
+                                            className={SAVE_BTN}
+                                            title="Edit Task"
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            onClick={() => onDelete(task.id)}
+                                            className={DELETE_BTN}
+                                            title="Delete task"
+                                        >
+                                            &times;
+                                        </button>
+                                    </div>
+                                </>
+                            )}
+                        </li>
+                    )
+                })}
             </ul>
 
             <div className="input-group input-group-sm">
@@ -56,10 +117,7 @@ function AddActionItemForm({ tasks, onAdd, onToggle, onDelete }) {
                     onChange={(e) => setNewItem(e.target.value)}
                     onKeyDown={handleKeyDown}
                 />
-                <button
-                    className={SAVE_BTN}
-                    onClick={handleAdd}
-                >
+                <button className={SAVE_BTN} onClick={handleAdd}>
                     +
                 </button>
             </div>

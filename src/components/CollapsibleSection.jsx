@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import {SAVE_BTN} from "../utils/Constants.js";
+import {FLEX_BETWEEN_CENTER, SAVE_BTN, SECTION_CONTAINER} from "../utils/Constants.js";
 
 const CollapsibleSection = ({ title, children, defaultExpanded }) => {
     const [isExpanded, setIsExpanded] = useState(defaultExpanded);
 
     return (
-        <div className="container mb-4 p-4 border rounded shadow-sm bg-light w-100">
+        <div className={SECTION_CONTAINER}>
 
             {/* Header */}
             <div
-                className="d-flex justify-content-between align-items-center"
+                className={FLEX_BETWEEN_CENTER}
                 style={{ cursor: 'pointer', userSelect: 'none' }}
                 onClick={() => setIsExpanded(!isExpanded)}
             >
