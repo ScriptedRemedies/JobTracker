@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { notifySuccess } from "../utils/Toast.js";
-import {SAVE_BTN, WORK_MODEL} from "../utils/constants.js";
+import {SAVE_BTN, WORK_MODEL} from "../utils/Constants.js";
 
 function Goals({ onUpdate, initialData }) {
 
