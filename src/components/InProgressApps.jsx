@@ -57,8 +57,7 @@ function InProgressApps({ jobs, onEdit, onDelete, onViewDetails }) {
                                                             style={{
                                                                 cursor: 'grab',
                                                                 minWidth: '320px',
-                                                                maxWidth: '320px',
-                                                                // Combine library styles (transform) with your styles
+                                                                maxWidth: 'fit-content',
                                                                 ...provided.draggableProps.style,
                                                                 opacity: snapshot.isDragging ? 0.8 : 1
                                                             }}
