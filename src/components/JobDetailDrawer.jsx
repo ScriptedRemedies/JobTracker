@@ -85,38 +85,44 @@ function JobDetailDrawer({ isOpen, onClose, job, onSave, initialEditMode = false
                     {/* --- READ ONLY VIEW MODE --- */}
                     {!isEditing ? (
                         <div className="d-flex flex-column gap-3">
-                            <div>
-                                <h2 className="fw-bold mb-0">{formData.position}</h2>
-                                <h5 className="text-muted">{formData.company}</h5>
-                            </div>
-
                             <div className="row g-3">
-                                <div className="col-6"><strong>Status:</strong> {formData.status}</div>
-                                <div className="col-6"><strong>Stage:</strong> {formData.stage}</div>
-                                <div className="col-6"><strong>Location:</strong> {formData.location || 'N/A'}</div>
-                                <div className="col-6"><strong>Model:</strong> {formData.workModel}</div>
-                                <div className="col-6"><strong>Salary:</strong> {formData.salary ? `$${formData.salary}` : 'N/A'}</div>
-                                <div className="col-6"><strong>Fit:</strong> {formData.fitStatus}</div>
-                                <div className="col-12"><strong>Fit Reason:</strong> {formData.fitReason || 'N/A'}</div>
-                            </div>
-
-                            <hr />
-
-                            <div className="row g-3">
-                                <div className="col-6"><strong>Applied:</strong> {formData.dateApplied}</div>
-                                <div className="col-6"><strong>Via:</strong> {formData.appliedThrough || 'N/A'}</div>
-                                <div className="col-6"><strong>Interview:</strong> {formData.interviewDate || 'N/A'}</div>
-                                <div className="col-6"><strong>Contact:</strong> {formData.contact || 'N/A'}</div>
-                            </div>
-
-                            <div className="d-flex gap-3 mt-2">
+                                {/* Position */}
+                                <h6 className="col-6">Position: {formData.position}</h6>
+                                {/* Company */}
+                                <p className="col-6">Company: {formData.company}</p>
+                                {/* Location */}
+                                {formData.location && <div className="col-6"><p>Location: {formData.location}</p></div>}
+                                {/* Work Model */}
+                                <div className="col-6"><p>Model: {formData.workModel}</p></div>
+                                {/* Salary */}
+                                <div className="col-6"><p>Salary: {formData.salary ? `$${formData.salary}` : 'Not Posted'}</p></div>
+                                {/* Fit Status */}
+                                <div className="col-6"><p>Fit: {formData.fitStatus}</p></div>
+                                {/* Fit Reason */}
+                                {formData.fitReason && <div className="col-12"><p>Fit Reason: {formData.fitReason}</p></div>}
+                                {/* Job Posting Link */}
                                 {formData.jobPostingLink && <a href={formData.jobPostingLink} target="_blank" rel="noreferrer" className={SAVE_BTN}>Job Posting</a>}
+                                {/* Job Portal Link */}
                                 {formData.jobAppPortalLink && <a href={formData.jobAppPortalLink} target="_blank" rel="noreferrer" className={SAVE_BTN}>Job Portal</a>}
-                            </div>
-
-                            <div className="bg-light p-3 rounded mt-2">
-                                <strong>Notes:</strong>
-                                <p className="mb-0 mt-1" style={{ whiteSpace: 'pre-wrap' }}>{formData.notes || 'No notes added.'}</p>
+                                {/* Application Status */}
+                                <div className="col-6"><p>Status: {formData.status}</p></div>
+                                {/* Date Applied */}
+                                <div className="col-6"><p>Applied: {formData.dateApplied}</p></div>
+                                {/* Applied through */}
+                                {formData.appliedThrough && <div className="col-6"><p>Applied Through: {formData.appliedThrough}</p></div>}
+                                {/* Interview Stage */}
+                                {formData.stage && <div className="col-6"><p>Stage: {formData.stage}</p></div>}
+                                {/* Interview Date */}
+                                {formData.interviewDate && <div className="col-6"><p>Next Interview Date: {formData.interviewDate}</p></div>}
+                                {/* Contact */}
+                                {formData.contact && <div className="col-6"><p>Contact: {formData.contact}</p></div>}
+                                {/* Notes */}
+                                {formData.notes &&
+                                    <div className="col-12">
+                                        <p>Notes:</p>
+                                        <p className="mb-0 mt-1" style={{ whiteSpace: 'pre-wrap' }}>{formData.notes || 'No notes added.'}</p>
+                                    </div>
+                                }
                             </div>
                         </div>
                     ) : (
