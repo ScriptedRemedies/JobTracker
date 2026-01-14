@@ -9,6 +9,7 @@ import {
     WORK_MODEL
 } from '../utils/Constants';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import * as XLSX from 'xlsx';
 
 function JobTable({ jobs, onEdit, onDelete }) {
     const [sortConfig, setSortConfig] = useState({ key: 'dateApplied', direction: 'desc' });
@@ -63,6 +64,31 @@ function JobTable({ jobs, onEdit, onDelete }) {
             ? <FontAwesomeIcon icon="chevron-up" className="ms-1" />
             : <FontAwesomeIcon icon="chevron-down" className="ms-1" />;
     };
+    const handleExport = () => {
+        const dataToExport = sortedJobs.map(job => ({
+            Position: job.position,
+            Company: job.company,
+            Location: job.location,
+            "Work Model": job.workModel,
+            Salary: job.salary ? Number(job.salary) : 0,
+            "Fit Status": job.fitStatus,
+            "Fit Reason": job.fitReason,
+            Status: job.status,
+            "Date Applied": job.dateApplied,
+            "Applied Through": job.appliedThrough,
+            Stage: job.stage,
+            "Interview Date": job.interviewDate,
+            Contact: job.contact,
+            Notes: job.notes
+        }));
+
+        const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Applications");
+
+        XLSX.writeFile(workbook, "MyJobApplications.xlsx");
+    };
 
     return (
         <div className="table-responsive">
@@ -89,6 +115,13 @@ function JobTable({ jobs, onEdit, onDelete }) {
                         {STATUS.map(s => <option key={s} value={s}>{s}</option>)}
                     </select>
                 </div>
+                <button
+                    className={SAVE_BTN}
+                    onClick={handleExport}
+                >
+                    <FontAwesomeIcon icon="file-export" className="me-1" />
+                    Export to Excel
+                </button>
                 <button
                     className={SAVE_BTN}
                     onClick={() => setFilters({ workModel: '', fitStatus: '', status: '' })}
