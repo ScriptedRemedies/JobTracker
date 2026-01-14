@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { notifySuccess, notifyError } from '../utils/Toast'
 import {BTN_CONTAINER, DELETE_BTN, INPUT_SM, SAVE_BTN, SIDEBAR_COMPONENTS} from "../utils/Constants.js";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 function AddActionItemForm({ tasks, onAdd, onToggle, onEdit, onDelete }) {
 
@@ -65,7 +66,7 @@ function AddActionItemForm({ tasks, onAdd, onToggle, onEdit, onDelete }) {
                                         Save
                                     </button>
                                     <button onClick={handleCancelEdit} className={DELETE_BTN}>
-                                        &times;
+                                        <FontAwesomeIcon icon="times" />
                                     </button>
                                 </div>
                             ) : (
@@ -98,7 +99,7 @@ function AddActionItemForm({ tasks, onAdd, onToggle, onEdit, onDelete }) {
                                             className={DELETE_BTN}
                                             title="Delete task"
                                         >
-                                            &times;
+                                            <FontAwesomeIcon icon="trash" />
                                         </button>
                                     </div>
                                 </>
@@ -118,7 +119,7 @@ function AddActionItemForm({ tasks, onAdd, onToggle, onEdit, onDelete }) {
                     onKeyDown={handleKeyDown}
                 />
                 <button className={SAVE_BTN} onClick={handleAdd}>
-                    +
+                    <FontAwesomeIcon icon="plus" />
                 </button>
             </div>
         </div>

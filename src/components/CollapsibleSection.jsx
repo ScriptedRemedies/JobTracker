@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {FLEX_BETWEEN_CENTER, SAVE_BTN, SECTION_CONTAINER} from "../utils/Constants.js";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const CollapsibleSection = ({ title, children, defaultExpanded }) => {
     const [isExpanded, setIsExpanded] = useState(defaultExpanded);
@@ -17,10 +18,10 @@ const CollapsibleSection = ({ title, children, defaultExpanded }) => {
                 <button className={SAVE_BTN}>
                     {isExpanded ? (
                         /* Up Arrow (Chevron) */
-                        <i className="bi bi-chevron-up">▲</i>
+                        <FontAwesomeIcon icon="chevron-up" />
                     ) : (
                         /* Down Arrow (Chevron) */
-                        <i className="bi bi-chevron-down">▼</i>
+                        <FontAwesomeIcon icon="chevron-down" />
                     )}
                 </button>
             </div>

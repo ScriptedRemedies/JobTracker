@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {notifyError, notifySuccess} from "../utils/Toast.js";
 import {DELETE_BTN, INPUT_SM, SAVE_BTN, SIDEBAR_COMPONENTS} from "../utils/Constants.js";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 function SavedLinks({ links, onAdd, onEdit, onDelete }) {
     const [formState, setFormState] = useState({
@@ -121,7 +122,7 @@ function SavedLinks({ links, onAdd, onEdit, onDelete }) {
                                             className={DELETE_BTN}
                                             title="Delete"
                                         >
-                                            &times;
+                                            <FontAwesomeIcon icon="trash" />
                                         </button>
                                     </div>
                                 </div>
