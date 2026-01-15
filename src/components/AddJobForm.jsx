@@ -10,6 +10,7 @@ import {
     INPUT_FIELD,
     SELECT_FIELD
 } from '../utils/Constants'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 function AddJobForm({ onAdd }) {
 
@@ -73,7 +74,7 @@ function AddJobForm({ onAdd }) {
     }
 
     return (
-        <div className="row g-3">
+        <div className="row g-3 shadow-gutter">
 
             {/* Position */}
             <div className="col-md-3">
@@ -201,7 +202,7 @@ function AddJobForm({ onAdd }) {
             {/* Add Button */}
             <div className="col-12 mt-4 text-end">
                 <button onClick={handleSubmit} className={SAVE_BTN}>
-                    Add Job Application
+                    <FontAwesomeIcon icon="floppy-disk" />
                 </button>
             </div>
 

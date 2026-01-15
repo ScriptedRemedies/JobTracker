@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { notifySuccess } from "../utils/Toast.js";
 import {FORM_LABEL, INPUT_FIELD, SAVE_BTN, SELECT_FIELD, SIDEBAR_COMPONENTS, WORK_MODEL} from "../utils/Constants.js";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 function Goals({ onUpdate, initialData }) {
 
@@ -27,7 +28,7 @@ function Goals({ onUpdate, initialData }) {
             {/* Position */}
             <div className="row mb-3">
                 <label className={FORM_LABEL}>Position Title</label>
-                <input name="position" type="text" value={formState.position} onChange={handleChange}/>
+                <input name="position" type="text" className={INPUT_FIELD} value={formState.position} onChange={handleChange}/>
             </div>
 
             {/* Work Model */}
@@ -57,7 +58,7 @@ function Goals({ onUpdate, initialData }) {
             {/* Submit Button */}
             <div className="mt-4 text-end">
                 <button onClick={handleSubmit} className={SAVE_BTN}>
-                    Save Goals
+                    <FontAwesomeIcon icon="floppy-disk" />
                 </button>
             </div>
         </div>

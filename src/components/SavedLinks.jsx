@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {notifyError, notifySuccess} from "../utils/Toast.js";
-import {DELETE_BTN, INPUT_SM, SAVE_BTN, SIDEBAR_COMPONENTS} from "../utils/Constants.js";
+import {BTN_CONTAINER, DELETE_BTN, INPUT_SM, SAVE_BTN, SIDEBAR_COMPONENTS} from "../utils/Constants.js";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 function SavedLinks({ links, onAdd, onEdit, onDelete }) {
@@ -49,7 +49,7 @@ function SavedLinks({ links, onAdd, onEdit, onDelete }) {
     }
 
     return (
-        <div className={SIDEBAR_COMPONENTS}>
+        <div className={`${SIDEBAR_COMPONENTS} shadow-gutter`}>
             <h6 className="fw-bold mb-3">Saved Links</h6>
 
             <ul className="list-unstyled mb-3">
@@ -61,7 +61,7 @@ function SavedLinks({ links, onAdd, onEdit, onDelete }) {
                     return (
                         <li key={link.id} className="mb-2">
                             {isEditing ? (
-                                <div>
+                                <div className="p-2 border rounded bg-light">
                                     {/* Title Input */}
                                     <div className="mb-2">
                                         <label className="form-label small text-muted mb-0">Title</label>
@@ -92,30 +92,37 @@ function SavedLinks({ links, onAdd, onEdit, onDelete }) {
                                             onClick={handleSaveEdit}
                                             className={SAVE_BTN}
                                         >
-                                            Save
+                                            <FontAwesomeIcon icon="floppy-disk" />
                                         </button>
                                         <button
                                             onClick={handleCancelEdit}
                                             className={DELETE_BTN}
                                         >
-                                            Cancel
+                                            <FontAwesomeIcon icon="ban" />
                                         </button>
                                     </div>
                                 </div>
                             ) : (
                                 <div className="d-flex justify-content-between align-items-center">
                                     <div className="text-truncate" style={{ maxWidth: '180px' }}>
-                                        <a href={link.link} target="_blank" rel="noopener noreferrer" className="text-decoration-none">
+                                        <a
+                                            href={link.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            style={{
+                                                color: '#000'
+                                            }}
+                                        >
                                             {link.title}
                                         </a>
                                     </div>
-                                    <div className="d-flex gap-2">
+                                    <div className={BTN_CONTAINER}>
                                         <button
                                             onClick={() => handleEditClick(link)}
                                             className={SAVE_BTN}
                                             title="Edit"
                                         >
-                                            Edit
+                                            <FontAwesomeIcon icon="edit" />
                                         </button>
                                         <button
                                             onClick={() => onDelete(link.id)}
@@ -155,7 +162,7 @@ function SavedLinks({ links, onAdd, onEdit, onDelete }) {
                         className={SAVE_BTN}
                         onClick={handleAdd}
                     >
-                        Add Link
+                        <FontAwesomeIcon icon="plus" />
                     </button>
                 </div>
             </div>

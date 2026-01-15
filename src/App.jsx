@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import './App.css'
 import AddJobForm from './components/AddJobForm'
 import {confirmAction, notifySuccess} from "./utils/Toast.js";
 import StatusChart from "./components/StatusChart.jsx";
@@ -11,8 +12,8 @@ import { DragDropContext } from '@hello-pangea/dnd';
 import JobDetailDrawer from "./components/JobDetailDrawer.jsx";
 import SavedLinks from "./components/SavedLinks.jsx";
 import { library } from '@fortawesome/fontawesome-svg-core'
-import {faChevronUp, faChevronDown, faSort, faTrash, faEdit, faPlus, faCheck, faTimes} from '@fortawesome/free-solid-svg-icons'
-library.add(faChevronUp, faChevronDown, faSort, faTrash, faEdit, faPlus, faCheck, faTimes)
+import {faChevronUp, faChevronDown, faSort, faTrash, faEdit, faPlus, faCheck, faTimes, faFloppyDisk, faBan} from '@fortawesome/free-solid-svg-icons'
+library.add(faChevronUp, faChevronDown, faSort, faTrash, faEdit, faPlus, faCheck, faTimes, faFloppyDisk, faBan)
 
 function App() {
     // JOBS ITEMS

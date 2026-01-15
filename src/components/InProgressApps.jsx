@@ -15,8 +15,16 @@ function InProgressApps({ jobs, onEdit, onDelete, onViewDetails }) {
                 {STATUS_COLUMNS.map(status => {
                     const jobsInColumn = jobs.filter(j => j.status === status)
 
+                    const columnColors = {
+                        'Applied': 'bg-pastel-blue',
+                        'Interviewing': 'bg-pastel-purple',
+                        'Offered': 'bg-pastel-green',
+                        'Rejected': 'bg-pastel-pink',
+                        'Ghosted': 'bg-pastel-yellow'
+                    };
+
                     return (
-                        <div key={status} className="w-100">
+                        <div key={status} className={`p-3 mb-4 neo-column ${columnColors[status] || 'bg-white'} m-1`}>
 
                             {/* Category Header */}
                             <h6 className={COLUMN_HEADER}>
@@ -29,11 +37,11 @@ function InProgressApps({ jobs, onEdit, onDelete, onViewDetails }) {
                                     <div
                                         ref={provided.innerRef}
                                         {...provided.droppableProps}
-                                        className="d-flex flex-row flex-nowrap overflow-auto pb-2"
+                                        className="d-flex flex-row flex-nowrap gap-3 overflow-auto pb-2 shadow-gutter neo-scrollbar"
                                         style={{
-                                            gap: '15px',
-                                            minHeight: '130px',
-                                            backgroundColor: snapshot.isDraggingOver ? '#f8f9fa' : 'transparent',
+                                            minHeight: '150px',
+                                            paddingBottom: jobsInColumn.length > 0 ?  '20px' : '0',
+                                            backgroundColor: snapshot.isDraggingOver ? 'rgba(0,0,0,0.05)' : 'transparent',
                                             transition: 'background-color 0.2s ease'
                                         }}
                                     >
@@ -53,12 +61,15 @@ function InProgressApps({ jobs, onEdit, onDelete, onViewDetails }) {
                                                             {...provided.draggableProps}
                                                             {...provided.dragHandleProps}
                                                             onClick={() => handleJobClick(job)}
+                                                            className={snapshot.isDragging ? "is-dragging" : ""}
                                                             style={{
-                                                                cursor: 'grab',
-                                                                minWidth: '320px',
-                                                                maxWidth: 'fit-content',
                                                                 ...provided.draggableProps.style,
-                                                                opacity: snapshot.isDragging ? 0.8 : 1
+                                                                cursor: 'grab',
+                                                                minWidth: 'fit-content',
+                                                                flexShrink: '0',
+                                                                height: 'fit-content',
+                                                                opacity: snapshot.isDragging ? 0.9 : 1,
+                                                                zIndex: snapshot.isDragging ? 1000 : 1,
                                                             }}
                                                         >
                                                             <JobCard

@@ -22,15 +22,31 @@ function StatusChart({ jobs }) {
             {
                 data: [counts.Applied, counts.Interviewing, counts.Offered, counts.Rejected, counts.Ghosted],
                 backgroundColor: [
-                    '#0D6EFD',
-                    '#6F42C1',
-                    '#198754',
-                    '#DC3545',
-                    '#6C757D'
+                    '#A2D2FF',
+                    '#CDB4DB',
+                    '#B9FBC0',
+                    '#FFC8DD',
+                    '#FDFFB6'
                 ],
-                borderWidth: 1,
+                borderColor: '#000000',
+                borderWidth: 2,
             },
         ],
+    };
+
+    const options = {
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#000',
+                    font: {
+                        family: 'system-ui',
+                        weight: 'bold'
+                    }
+                }
+            }
+        }
     };
 
     return (
@@ -39,7 +55,7 @@ function StatusChart({ jobs }) {
             <div style={{ position: 'relative', height: '200px', width: '100%' }}>
                 <Doughnut
                     data={data}
-                    options={{ maintainAspectRatio: false }}
+                    options={options}
                 />
             </div>
             <div className="text-center mt-3">

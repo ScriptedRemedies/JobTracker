@@ -40,7 +40,7 @@ function AddActionItemForm({ tasks, onAdd, onToggle, onEdit, onDelete }) {
     }
 
     return (
-        <div className={SIDEBAR_COMPONENTS}>
+        <div className={`${SIDEBAR_COMPONENTS} shadow-gutter`}>
             <h6 className="fw-bold mb-3">Action Items</h6>
 
             <ul className="list-unstyled mb-3">
@@ -63,10 +63,10 @@ function AddActionItemForm({ tasks, onAdd, onToggle, onEdit, onDelete }) {
                                         autoFocus
                                     />
                                     <button onClick={handleSaveEdit} className={SAVE_BTN}>
-                                        Save
+                                        <FontAwesomeIcon icon="floppy-disk" />
                                     </button>
                                     <button onClick={handleCancelEdit} className={DELETE_BTN}>
-                                        <FontAwesomeIcon icon="times" />
+                                        <FontAwesomeIcon icon="ban" />
                                     </button>
                                 </div>
                             ) : (
@@ -76,6 +76,7 @@ function AddActionItemForm({ tasks, onAdd, onToggle, onEdit, onDelete }) {
                                         className="form-check-input me-2"
                                         checked={task.completed}
                                         onChange={() => onToggle(task.id)}
+                                        style={{ border: '2px solid black' }}
                                     />
 
                                     <span style={{
@@ -92,7 +93,7 @@ function AddActionItemForm({ tasks, onAdd, onToggle, onEdit, onDelete }) {
                                             className={SAVE_BTN}
                                             title="Edit Task"
                                         >
-                                            Edit
+                                            <FontAwesomeIcon icon="edit" />
                                         </button>
                                         <button
                                             onClick={() => onDelete(task.id)}
@@ -112,7 +113,7 @@ function AddActionItemForm({ tasks, onAdd, onToggle, onEdit, onDelete }) {
             <div className="input-group input-group-sm">
                 <input
                     type="text"
-                    className="form-control"
+                    className={INPUT_SM}
                     placeholder="Add new task..."
                     value={newItem}
                     onChange={(e) => setNewItem(e.target.value)}

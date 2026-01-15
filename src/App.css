@@ -1,0 +1,167 @@
+/* Retro Utilities */
+.neo-card {
+    background-color: white;
+    border: 3px solid #000000 !important;
+    box-shadow: 5px 5px 0 0 #000000;
+    transition: all 0.2s ease;
+    border-radius: 12px !important;
+}
+.is-dragging .neo-card {
+    transition: none !important;
+    transform: none !important;
+    box-shadow: 7px 7px 0 0 #000000 !important;
+}
+.neo-column {
+    border: 3px solid #000000 !important;
+    box-shadow: 5px 5px 0 0 #000000;
+    border-radius: 12px !important;
+}
+.shadow-gutter {
+    padding-right: 12px !important;
+    padding-bottom: 12px !important;
+}
+.neo-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 0 #000000;
+}
+.neo-card.static-hover:hover {
+    transform: none !important;
+    box-shadow: 5px 5px 0 0 #000000 !important;
+}
+.neo-btn {
+    border: 2px solid #000000 !important;
+    box-shadow: 3px 3px 0 0 #000000;
+    font-weight: bold !important;
+    transition: all 0.1s ease;
+    border-radius: 8px !important;
+}
+.neo-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 0 #000000;
+}
+
+/* Retro Table Styling */
+.neo-table-container {
+    border: 3px solid #000 !important;
+    box-shadow: 8px 8px 0 0 #000;
+    border-radius: 12px;
+    background-color: #fff;
+    max-height: 500px;
+    overflow: auto;
+    position: relative;
+}
+.neo-table {
+    min-width: 1200px;
+    margin: 0 !important;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+.neo-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #FDFFB6 !important;
+    border-bottom: 3px solid #000 !important;
+    border-right: 2px solid #000 !important;
+    color: #000;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+.neo-table tbody td {
+    border-right: 2px solid #000 !important;
+    border-bottom: 2px solid #000 !important;
+    padding: 12px !important;
+    background-color: #FCF9ED;
+}
+/* Remove border from the last column and last row for a cleaner look */
+.neo-table thead th:last-child,
+.neo-table tbody td:last-child {
+    border-right: none !important;
+}
+.neo-table tbody tr:last-child td {
+    border-bottom: none !important;
+}
+/* Hover effect for rows */
+.neo-table tbody tr:hover td {
+    background-color: #B9FBC0 !important;
+    cursor: default;
+}
+
+/* Custom Scrollbar to match the theme */
+.neo-scrollbar {
+    overflow-x: auto !important;
+}
+.neo-scrollbar::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+.neo-scrollbar::-webkit-scrollbar-track {
+    background: #fff;
+    border-left: 2px solid #000;
+    border-top: 2px solid #000;
+    border-radius: 10px;
+}
+.neo-scrollbar::-webkit-scrollbar-thumb {
+    background: #A2D2FF;
+    border: 2px solid #000;
+    border-radius: 10px;
+}
+.neo-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #B9FBC0;
+}
+
+/* Pastel Palette */
+.bg-pastel-blue   { background-color: #A2D2FF !important; }
+.bg-pastel-green  { background-color: #B9FBC0 !important; }
+.bg-pastel-yellow { background-color: #FDFFB6 !important; }
+.bg-pastel-pink   { background-color: #FFC8DD !important; }
+.bg-pastel-purple { background-color: #CDB4DB !important; }
+
+/* Retro Inputs */
+.form-control, .form-select {
+    border: 2px solid #000 !important;
+    border-radius: 8px !important;
+    background-color: #FCF9ED !important;
+    box-shadow: 2px 2px 0 0 #000 !important;
+    transition: all 0.1s ease;
+}
+.form-control:focus, .form-select:focus {
+    background-color: #fff !important;
+    box-shadow: 4px 4px 0 0 #000 !important;
+    transform: translate(-1px, -1px);
+    outline: none;
+    border-color: #000 !important;
+}
+/* Make input groups match */
+.input-group-text {
+    border: 2px solid #000 !important;
+    background-color: #FDFFB6 !important;
+    font-weight: bold;
+}
+
+/* Custom Retro SweetAlert2 */
+.swal2-popup {
+    border: 3px solid #000 !important;
+    box-shadow: 8px 8px 0 0 #000 !important;
+    border-radius: 15px !important;
+    background-color: #fff !important;
+}
+.swal2-title, .swal2-html-container {
+    color: #000 !important;
+    font-family: 'system-ui', sans-serif;
+}
+.swal2-confirm {
+    background-color: #B9FBC0 !important;
+    color: #000 !important;
+    border: 2px solid #000 !important;
+    box-shadow: 3px 3px 0 0 #000 !important;
+    font-weight: bold !important;
+}
+.swal2-cancel {
+    background-color: #FFC8DD !important;
+    color: #000 !important;
+    border: 2px solid #000 !important;
+    box-shadow: 3px 3px 0 0 #000 !important;
+    font-weight: bold !important;
+}

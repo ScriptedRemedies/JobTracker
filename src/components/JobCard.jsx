@@ -3,8 +3,25 @@ import {BADGE_STYLE, CARD_STYLE} from "../utils/Constants.js";
 
 function JobCard({ job }) {
 
+    const getStatusColor = (status) => {
+        switch (status) {
+            case 'Applied': return 'bg-pastel-blue';
+            case 'Interviewing': return 'bg-pastel-purple';
+            case 'Offered': return 'bg-pastel-green';
+            case 'Rejected': return 'bg-pastel-pink';
+            default: return 'bg-pastel-yellow';
+        }
+    };
+
     return (
-        <div className={CARD_STYLE}>
+        <div
+            className={`${CARD_STYLE} ${getStatusColor(job.status)} m-1`}
+            style={{
+                minWidth: '320px',
+                width: 'auto',
+                whiteSpace: 'nowrap',
+            }}
+        >
             <div className="card-body p-2">
                 {/* Position Header & Company */}
                 <h6 className="card-title mb-0 fw-bold">{job.position}</h6>
@@ -13,7 +30,6 @@ function JobCard({ job }) {
                 {/* Badges */}
                 <div className="d-flex gap-2">
                     <span className={BADGE_STYLE}>{job.workModel}</span>
-                    <span className={BADGE_STYLE}>{job.fitStatus}</span>
                     <span className={BADGE_STYLE}>{job.fitStatus}</span>
                     {job.status === "Interviewing" && (
                         <span className={BADGE_STYLE}>{job.stage}</span>

@@ -91,9 +91,9 @@ function JobTable({ jobs, onEdit, onDelete }) {
     };
 
     return (
-        <div className="table-responsive">
+        <div className="shadow-gutter">
             {/* Filter Bar */}
-            <div className="d-flex gap-3 mb-3 align-items-end">
+            <div className="d-flex flex-wrap gap-3 mb-4 align-items-end">
                 <div>
                     <label className={FORM_LABEL_SMALL}>Work Model</label>
                     <select name="workModel" className={SELECT_FIELD} value={filters.workModel} onChange={handleFilterChange}>
@@ -123,107 +123,110 @@ function JobTable({ jobs, onEdit, onDelete }) {
                     Export to Excel
                 </button>
                 <button
-                    className={SAVE_BTN}
+                    className={DELETE_BTN}
                     onClick={() => setFilters({ workModel: '', fitStatus: '', status: '' })}
                 >
                     Clear Filters
                 </button>
             </div>
-            <table className="table table-hover table-striped mt-3 align-middle">
-                <thead>
-                <tr className="text-nowrap">
-                    <th scope="col" onClick={() => requestSort('position')} style={{ cursor: 'pointer' }}>
-                        Position {getSortIcon('position')}
-                    </th>
-                    <th scope="col" onClick={() => requestSort('company')} style={{ cursor: 'pointer' }}>
-                        Company {getSortIcon('company')}
-                    </th>
-                    <th scope="col" onClick={() => requestSort('location')} style={{ cursor: 'pointer' }}>
-                        Location {getSortIcon('location')}
-                    </th>
-                    <th scope="col" onClick={() => requestSort('workModel')} style={{ cursor: 'pointer' }}>
-                        Work Model {getSortIcon('workModel')}
-                    </th>
-                    <th scope="col" onClick={() => requestSort('salary')} style={{ cursor: 'pointer' }}>
-                        Salary {getSortIcon('salary')}
-                    </th>
-                    <th scope="col" onClick={() => requestSort('fitStatus')} style={{ cursor: 'pointer' }}>
-                        Fit Status {getSortIcon('fitStatus')}
-                    </th>
-                    <th scope="col">Fit Reason</th>
-                    <th scope="col">Job Posting</th>
-                    <th scope="col">Job Portal</th>
-                    <th scope="col" onClick={() => requestSort('status')} style={{ cursor: 'pointer' }}>
-                        Status {getSortIcon('status')}
-                    </th>
-                    <th scope="col" onClick={() => requestSort('dateApplied')} style={{ cursor: 'pointer' }}>
-                        Date Applied {getSortIcon('dateApplied')}
-                    </th>
-                    <th scope="col" onClick={() => requestSort('appliedThrough')} style={{ cursor: 'pointer' }}>
-                        Applied Through {getSortIcon('appliedThrough')}
-                    </th>
-                    <th scope="col" onClick={() => requestSort('stage')} style={{ cursor: 'pointer' }}>
-                        Interview Stage {getSortIcon('stage')}
-                    </th>
-                    <th scope="col" onClick={() => requestSort('interviewDate')} style={{ cursor: 'pointer' }}>
-                        Interview Date {getSortIcon('interviewDate')}
-                    </th>
-                    <th scope="col">Contact</th>
-                    <th scope="col">Notes</th>
-                    <th scope="col">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                {sortedJobs.map(job => (
-                    <tr key={job.id}>
-                        <td>{job.position}</td>
-                        <td>{job.company}</td>
-                        <td>{job.location}</td>
-                        <td>{job.workModel}</td>
-                        <td>
-                            {job.salary ? `$${Number(job.salary).toLocaleString()}` : "Not Listed"}
-                        </td>
-                        <td>{job.fitStatus}</td>
-                        <td>{job.fitReason}</td>
-                        <td>
-                            {job.jobPostingLink && (
-                                <a href={job.jobPostingLink} target="_blank" rel="noopener noreferrer">Link</a>
-                            )}
-                        </td>
-                        <td>
-                            {job.jobAppPortalLink && (
-                                <a href={job.jobAppPortalLink} target="_blank" rel="noopener noreferrer">Link</a>
-                            )}
-                        </td>
-                        <td>{job.status}</td>
-                        <td>{job.dateApplied}</td>
-                        <td>{job.appliedThrough}</td>
-                        <td>{job.stage}</td>
-                        <td>{job.interviewDate}</td>
-                        <td>{job.contact}</td>
-                        <td>{job.notes}</td>
-                        <td>
-                            <div className={BTN_CONTAINER}>
-                                <button
-                                    onClick={() => onEdit(job.id)}
-                                    className={SAVE_BTN}
-                                    title="Edit"
-                                >
-                                    Edit
-                                </button>
-                                <button
-                                    onClick={() => onDelete(job.id)}
-                                    className={DELETE_BTN}
-                                    title="Delete"
-                                >
-                                    <FontAwesomeIcon icon="trash" />
-                                </button>
-                            </div>
-                        </td>
+            {/* Table Content */}
+            <div className="neo-table-container neo-scrollbar">
+                <table className="table neo-table align-middle">
+                    <thead>
+                    <tr className="text-nowrap">
+                        <th scope="col" onClick={() => requestSort('position')} style={{ cursor: 'pointer' }}>
+                            Position {getSortIcon('position')}
+                        </th>
+                        <th scope="col" onClick={() => requestSort('company')} style={{ cursor: 'pointer' }}>
+                            Company {getSortIcon('company')}
+                        </th>
+                        <th scope="col" onClick={() => requestSort('location')} style={{ cursor: 'pointer' }}>
+                            Location {getSortIcon('location')}
+                        </th>
+                        <th scope="col" onClick={() => requestSort('workModel')} style={{ cursor: 'pointer' }}>
+                            Work Model {getSortIcon('workModel')}
+                        </th>
+                        <th scope="col" onClick={() => requestSort('salary')} style={{ cursor: 'pointer' }}>
+                            Salary {getSortIcon('salary')}
+                        </th>
+                        <th scope="col" onClick={() => requestSort('fitStatus')} style={{ cursor: 'pointer' }}>
+                            Fit Status {getSortIcon('fitStatus')}
+                        </th>
+                        <th scope="col">Fit Reason</th>
+                        <th scope="col">Job Posting</th>
+                        <th scope="col">Job Portal</th>
+                        <th scope="col" onClick={() => requestSort('status')} style={{ cursor: 'pointer' }}>
+                            Status {getSortIcon('status')}
+                        </th>
+                        <th scope="col" onClick={() => requestSort('dateApplied')} style={{ cursor: 'pointer' }}>
+                            Date Applied {getSortIcon('dateApplied')}
+                        </th>
+                        <th scope="col" onClick={() => requestSort('appliedThrough')} style={{ cursor: 'pointer' }}>
+                            Applied Through {getSortIcon('appliedThrough')}
+                        </th>
+                        <th scope="col" onClick={() => requestSort('stage')} style={{ cursor: 'pointer' }}>
+                            Interview Stage {getSortIcon('stage')}
+                        </th>
+                        <th scope="col" onClick={() => requestSort('interviewDate')} style={{ cursor: 'pointer' }}>
+                            Interview Date {getSortIcon('interviewDate')}
+                        </th>
+                        <th scope="col">Contact</th>
+                        <th scope="col">Notes</th>
+                        <th scope="col">Actions</th>
                     </tr>
-                ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {sortedJobs.map(job => (
+                        <tr key={job.id}>
+                            <td>{job.position}</td>
+                            <td>{job.company}</td>
+                            <td>{job.location}</td>
+                            <td>{job.workModel}</td>
+                            <td>
+                                {job.salary ? `$${Number(job.salary).toLocaleString()}` : "Not Listed"}
+                            </td>
+                            <td>{job.fitStatus}</td>
+                            <td>{job.fitReason}</td>
+                            <td>
+                                {job.jobPostingLink && (
+                                    <a href={job.jobPostingLink} target="_blank" rel="noopener noreferrer">Link</a>
+                                )}
+                            </td>
+                            <td>
+                                {job.jobAppPortalLink && (
+                                    <a href={job.jobAppPortalLink} target="_blank" rel="noopener noreferrer">Link</a>
+                                )}
+                            </td>
+                            <td>{job.status}</td>
+                            <td>{job.dateApplied}</td>
+                            <td>{job.appliedThrough}</td>
+                            <td>{job.stage}</td>
+                            <td>{job.interviewDate}</td>
+                            <td>{job.contact}</td>
+                            <td>{job.notes}</td>
+                            <td>
+                                <div className={BTN_CONTAINER}>
+                                    <button
+                                        onClick={() => onEdit(job.id)}
+                                        className={SAVE_BTN}
+                                        title="Edit"
+                                    >
+                                        <FontAwesomeIcon icon="edit" />
+                                    </button>
+                                    <button
+                                        onClick={() => onDelete(job.id)}
+                                        className={DELETE_BTN}
+                                        title="Delete"
+                                    >
+                                        <FontAwesomeIcon icon="trash" />
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }
