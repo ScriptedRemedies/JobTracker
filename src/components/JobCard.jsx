@@ -13,6 +13,17 @@ function JobCard({ job }) {
             default: return 'bg-pastel-yellow';
         }
     };
+    const getFitColor = (fitStatus) => {
+        switch (fitStatus) {
+            case 'Would Prefer' : return 'bg-pastel-green';
+            case 'Average' : return 'bg-pastel-yellow';
+            case 'No Preference' : return 'bg-pastel-pink';
+            default: return 'bg-pastel-yellow';
+        }
+    }
+    const getBadgeStyle = (colorClass) => {
+        return `${BADGE_STYLE.replace('bg-pastel-yellow', '')} ${colorClass}`;
+    };
 
     return (
         <div
@@ -31,7 +42,9 @@ function JobCard({ job }) {
                 {/* Badges */}
                 <div className="d-flex gap-2">
                     <span className={BADGE_STYLE}>{job.workModel}</span>
-                    <span className={BADGE_STYLE}>{job.fitStatus}</span>
+                    <span className={getBadgeStyle(getFitColor(job.fitStatus))}>
+                        {job.fitStatus}
+                    </span>
                     {job.status === "Interviewing" && (
                         <span className={BADGE_STYLE}>{job.stage}</span>
                     )}
