@@ -189,13 +189,13 @@ function AddJobForm({ onAdd }) {
             {/* Contact */}
             <div className="col-md-6">
                 <label className={FORM_LABEL}>Contact Info</label>
-                <textarea name="contact" className={INPUT_FIELD} value={formState.contact} onChange={handleChange}/>
+                <textarea name="contact" className={INPUT_FIELD} rows="4" value={formState.contact} onChange={handleChange}/>
             </div>
 
-            {/* Notes (Takes up remaining space) */}
+            {/* Notes */}
             <div className="col-md-6">
                 <label className={FORM_LABEL}>Notes</label>
-                <textarea name="notes" className={INPUT_FIELD} value={formState.notes} onChange={handleChange}/>
+                <textarea name="notes" className={INPUT_FIELD} rows="4" value={formState.notes} onChange={handleChange}/>
             </div>
 
             {/* Add Button */}
