@@ -140,6 +140,25 @@
     font-weight: bold;
 }
 
+/* Retro Radio Buttons */
+.form-check-input {
+    border: 2px solid #000 !important;
+    box-shadow: 2px 2px 0 0 #000 !important;
+    background-color: #FCF9ED !important;
+    width: 1.3em;
+    height: 1.3em;
+    cursor: pointer;
+}
+.form-check-input:checked {
+    background-color: #A2D2FF !important;
+    border-color: #000 !important;
+}
+.form-check-label {
+    font-weight: bold;
+    cursor: pointer;
+    padding-top: 4px;
+}
+
 /* Custom Retro SweetAlert2 */
 .swal2-popup {
     border: 3px solid #000 !important;

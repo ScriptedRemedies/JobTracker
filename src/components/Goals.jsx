@@ -8,7 +8,9 @@ function Goals({ onUpdate, initialData }) {
     const [formState, setFormState] = useState(initialData || {
         position: '',
         workModel: '',
-        salary: ''
+        salary: '',
+        appFrequency: '',
+        appAmount: ''
     })
 
     const handleChange = (e) => {
@@ -53,6 +55,60 @@ function Goals({ onUpdate, initialData }) {
                         placeholder="e.g. 65000"
                     />
                 </div>
+            </div>
+
+            {/* Application Frequency (radio buttons) */}
+            <div className="row mb-3">
+                <div className="col-12">
+                    <label className={FORM_LABEL}>Application Frequency</label>
+                    <div className="d-flex gap-4 mt-1">
+                        {/* Weekly Option */}
+                        <div className="form-check">
+                            <input
+                                className="form-check-input"
+                                type="radio"
+                                name="appFrequency"
+                                id="freqWeekly"
+                                value="Weekly"
+                                checked={formState.appFrequency === 'Weekly'}
+                                onChange={handleChange}
+                            />
+                            <label className="form-check-label">
+                                Weekly
+                            </label>
+                        </div>
+
+                        {/* Daily Option */}
+                        <div className="form-check">
+                            <input
+                                className="form-check-input"
+                                type="radio"
+                                name="appFrequency"
+                                id="freqDaily"
+                                value="Daily"
+                                checked={formState.appFrequency === 'Daily'}
+                                onChange={handleChange}
+                            />
+                            <label className="form-check-label">
+                                Daily
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Application Goal (number) */}
+            <div className="row mb-3">
+                <label className={FORM_LABEL}>Application Amount</label>
+                <input
+                    name="appAmount"
+                    type="number"
+                    className={INPUT_FIELD}
+                    value={formState.appGoal}
+                    onChange={handleChange}
+                    placeholder="e.g. 5"
+                    min="1"
+                />
             </div>
 
             {/* Submit Button */}
