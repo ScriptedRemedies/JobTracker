@@ -1,5 +1,6 @@
 import React from 'react';
 import {BADGE_STYLE, CARD_STYLE} from "../utils/Constants.js";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 function JobCard({ job }) {
 
@@ -33,6 +34,9 @@ function JobCard({ job }) {
                     <span className={BADGE_STYLE}>{job.fitStatus}</span>
                     {job.status === "Interviewing" && (
                         <span className={BADGE_STYLE}>{job.stage}</span>
+                    )}
+                    {job.contact && (
+                        <span className={BADGE_STYLE} title="Application has contact info."><FontAwesomeIcon icon="address-card" /></span>
                     )}
                 </div>
 

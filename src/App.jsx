@@ -12,8 +12,8 @@ import { DragDropContext } from '@hello-pangea/dnd';
 import JobDetailDrawer from "./components/JobDetailDrawer.jsx";
 import SavedLinks from "./components/SavedLinks.jsx";
 import { library } from '@fortawesome/fontawesome-svg-core'
-import {faChevronUp, faChevronDown, faSort, faTrash, faEdit, faPlus, faCheck, faTimes, faFloppyDisk, faBan} from '@fortawesome/free-solid-svg-icons'
-library.add(faChevronUp, faChevronDown, faSort, faTrash, faEdit, faPlus, faCheck, faTimes, faFloppyDisk, faBan)
+import {faChevronUp, faChevronDown, faSort, faTrash, faEdit, faPlus, faCheck, faTimes, faFloppyDisk, faBan, faAddressCard} from '@fortawesome/free-solid-svg-icons'
+library.add(faChevronUp, faChevronDown, faSort, faTrash, faEdit, faPlus, faCheck, faTimes, faFloppyDisk, faBan, faAddressCard)
 
 function App() {
     // JOBS ITEMS
