@@ -114,21 +114,17 @@ function JobDetailDrawer({ isOpen, onClose, job, onSave, initialEditMode = false
                     {!isEditing ? (
                         /* --- CLEAN READ-ONLY VIEW --- */
                         <div className="row g-3">
-                            <div className="row">
-                                <DetailItem label="Position" value={formData.position} col="col-6"/>
-                                <DetailItem label="Company" value={formData.company} col="col-3"/>
-                                <DetailItem label="Company Location" value={formData.location} col="col-3"/>
+                            <div className="row g-2">
+                                <DetailItem label="Position" value={formData.position} col="col-md-3"/>
+                                <DetailItem label="Company" value={formData.company} col="col-md-3"/>
+                                <DetailItem label="Company Location" value={formData.location} col="col-md-3"/>
+                                <DetailItem label="Work Model" value={formData.workModel} col="col-md-3" />
                             </div>
-                            <div className="row">
-                                <DetailItem label="Salary" value={formData.salary ? `$${Number(formData.salary).toLocaleString()}` : null} col="col-3" />
-                                <DetailItem label="Work Model" value={formData.workModel} col="col-3" />
-                                <DetailItem label="Application Status" value={formData.status} col="col-3" />
-                                <DetailItem label="Applied On" value={formData.dateApplied} col="col-3" />
-                            </div>
-                            <div className="row">
-                                <DetailItem label="Fit Status" value={formData.fitStatus} col="col-3" />
+                            <div className="row g-2">
+                                <DetailItem label="Salary" value={formData.salary ? `$${Number(formData.salary).toLocaleString()}` : null} col="col-md-3" />
+                                <DetailItem label="Fit Status" value={formData.fitStatus} col="col-md-3" />
                                 {formData.fitReason && (
-                                    <div className="col-9">
+                                    <div className="col-md-6">
                                         <div className={`${getFitColor(formData.fitStatus)} neo-card p-3`}>
                                             <label className="text-muted small fw-bold d-block mb-1">Fit Reason</label>
                                             <p className="mb-0" style={{ whiteSpace: 'pre-wrap' }}>{formData.fitReason}</p>
@@ -137,41 +133,44 @@ function JobDetailDrawer({ isOpen, onClose, job, onSave, initialEditMode = false
                                 )}
                             </div>
                             <div className="row g-2">
-                                <DetailItem label="Applied Via" value={formData.appliedThrough} col="col-3" />
-                                <DetailItem label="Current Stage" value={formData.stage} col="col-3" />
-                                <DetailItem label="Next Interview Date" value={formData.interviewDate} col="col-3" />
+                                <div className="col-md-3">
+                                    {formData.jobPostingLink && (
+                                        <a href={formData.jobPostingLink} target="_blank" rel="noreferrer" className={SAVE_BTN}>
+                                            View Posting
+                                        </a>
+                                    )}
+                                </div>
+                                <div className="col-md-3">
+                                    {formData.jobAppPortalLink && (
+                                        <a href={formData.jobAppPortalLink} target="_blank" rel="noreferrer" className={SAVE_BTN}>
+                                            View Portal
+                                        </a>
+                                    )}
+                                </div>
+                                <DetailItem label="Application Status" value={formData.status} col="col-md-3" />
+                                <DetailItem label="Applied On" value={formData.dateApplied} col="col-md-3" />
                             </div>
-                            <div className="row">
+                            <div className="row g-2">
+                                <DetailItem label="Applied Through" value={formData.appliedThrough} col="col-md-3" />
+                                <DetailItem label="Current Stage" value={formData.stage} col="col-md-3" />
+                                <DetailItem label="Next Interview Date" value={formData.interviewDate} col="col-md-3" />
+                            </div>
+                            <div className="row g-2">
                                 {formData.contact && (
-                                    <div className="col-12 mt-3">
+                                    <div className="col-md-6">
                                         <div className="bg-pastel-blue neo-card p-3">
                                             <label className="text-muted small fw-bold d-block mb-1">Contact Info</label>
                                             <p className="mb-0" style={{ whiteSpace: 'pre-wrap' }}>{formData.contact}</p>
                                         </div>
                                     </div>
                                 )}
-                            </div>
-                            <div className="row">
                                 {formData.notes && (
-                                    <div className="col-12 mt-3">
+                                    <div className="col-md-6">
                                         <div className="bg-pastel-yellow neo-card p-3">
                                             <label className="text-muted small fw-bold d-block mb-1">Notes</label>
                                             <p className="mb-0" style={{ whiteSpace: 'pre-wrap' }}>{formData.notes}</p>
                                         </div>
                                     </div>
-                                )}
-                            </div>
-                            {/* Link Buttons */}
-                            <div className="col-12 d-flex gap-2 mt-3">
-                                {formData.jobPostingLink && (
-                                    <a href={formData.jobPostingLink} target="_blank" rel="noreferrer" className={SAVE_BTN}>
-                                        View Posting
-                                    </a>
-                                )}
-                                {formData.jobAppPortalLink && (
-                                    <a href={formData.jobAppPortalLink} target="_blank" rel="noreferrer" className={SAVE_BTN}>
-                                        View Portal
-                                    </a>
                                 )}
                             </div>
                         </div>
