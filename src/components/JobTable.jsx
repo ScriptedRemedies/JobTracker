@@ -152,7 +152,7 @@ function JobTable({ jobs, onEdit, onDelete }) {
                         <th scope="col" onClick={() => requestSort('fitStatus')} style={{ cursor: 'pointer' }}>
                             Fit Status {getSortIcon('fitStatus')}
                         </th>
-                        <th scope="col">Fit Reason</th>
+                        <th scope="col" style={{ minWidth: '200px' }}>Fit Reason</th>
                         <th scope="col">Job Posting</th>
                         <th scope="col">Job Portal</th>
                         <th scope="col" onClick={() => requestSort('status')} style={{ cursor: 'pointer' }}>
@@ -170,8 +170,8 @@ function JobTable({ jobs, onEdit, onDelete }) {
                         <th scope="col" onClick={() => requestSort('interviewDate')} style={{ cursor: 'pointer' }}>
                             Interview Date {getSortIcon('interviewDate')}
                         </th>
-                        <th scope="col">Contact</th>
-                        <th scope="col">Notes</th>
+                        <th scope="col" style={{ minWidth: '400px' }}>Contact</th>
+                        <th scope="col" style={{ minWidth: '650px' }}>Notes</th>
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
@@ -189,12 +189,12 @@ function JobTable({ jobs, onEdit, onDelete }) {
                             <td>{job.fitReason}</td>
                             <td>
                                 {job.jobPostingLink && (
-                                    <a href={job.jobPostingLink} target="_blank" rel="noopener noreferrer">Link</a>
+                                    <a href={job.jobPostingLink} className={SAVE_BTN} target="_blank" rel="noopener noreferrer">Link</a>
                                 )}
                             </td>
                             <td>
                                 {job.jobAppPortalLink && (
-                                    <a href={job.jobAppPortalLink} target="_blank" rel="noopener noreferrer">Link</a>
+                                    <a href={job.jobAppPortalLink} className={SAVE_BTN} target="_blank" rel="noopener noreferrer">Link</a>
                                 )}
                             </td>
                             <td>{job.status}</td>
