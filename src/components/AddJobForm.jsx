@@ -30,7 +30,7 @@ function AddJobForm({ onAdd }) {
         fitReason: '',
         jobPostingLink: '',
         jobAppPortalLink: '',
-        status: 'Not Applied',
+        status: 'Applied',
         dateApplied: getTodayString(),
         appliedThrough: '',
         stage: 'Not Started',
@@ -63,7 +63,7 @@ function AddJobForm({ onAdd }) {
             fitReason: '',
             jobPostingLink: '',
             jobAppPortalLink: '',
-            status: 'Not Applied',
+            status: 'Applied',
             dateApplied: getTodayString(),
             appliedThrough: '',
             stage: 'Not Started',
@@ -92,7 +92,7 @@ function AddJobForm({ onAdd }) {
 
             {/* Location */}
             <div className="col-md-3">
-                <label className={FORM_LABEL}>Location</label>
+                <label className={FORM_LABEL}>Company Location</label>
                 <input name="location" type="text" className={INPUT_FIELD} value={formState.location}
                        onChange={handleChange}/>
             </div>
@@ -130,10 +130,9 @@ function AddJobForm({ onAdd }) {
             </div>
 
             {/* Fit Reason */}
-            <div className="col-md-3">
+            <div className="col-md-6">
                 <label className={FORM_LABEL}>Fit Reason</label>
-                <input name="fitReason" type="text" className={INPUT_FIELD} value={formState.fitReason}
-                       onChange={handleChange}/>
+                <textarea name="fitReason" className={INPUT_FIELD} value={formState.fitReason} onChange={handleChange}/>
             </div>
 
             {/* Job Posting Link */}
@@ -174,7 +173,7 @@ function AddJobForm({ onAdd }) {
 
             {/* Stage */}
             <div className="col-md-3">
-                <label className={FORM_LABEL}>Current Stage</label>
+                <label className={FORM_LABEL}>Current Interview Stage</label>
                 <select name="stage" className={SELECT_FIELD} value={formState.stage} onChange={handleChange}>
                     {STAGE.map(stage => <option key={stage} value={stage}>{stage}</option>)}
                 </select>
@@ -182,7 +181,7 @@ function AddJobForm({ onAdd }) {
 
             {/* Interview Date */}
             <div className="col-md-3">
-                <label className={FORM_LABEL}>Interview Date</label>
+                <label className={FORM_LABEL}>Next Interview Date</label>
                 <input name="interviewDate" type="date" className={INPUT_FIELD} value={formState.interviewDate}
                        onChange={handleChange}/>
             </div>
@@ -194,7 +193,7 @@ function AddJobForm({ onAdd }) {
             </div>
 
             {/* Notes (Takes up remaining space) */}
-            <div className="col-md-12">
+            <div className="col-md-6">
                 <label className={FORM_LABEL}>Notes</label>
                 <textarea name="notes" className={INPUT_FIELD} value={formState.notes} onChange={handleChange}/>
             </div>
