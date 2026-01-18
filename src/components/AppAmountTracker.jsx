@@ -1,4 +1,5 @@
 import React from 'react';
+import Confetti from 'react-confetti';
 import {SIDEBAR_COMPONENTS} from "../utils/Constants.js";
 
 function AppAmountTracker({ goals, jobs }) {
@@ -53,6 +54,16 @@ function AppAmountTracker({ goals, jobs }) {
         <>
             {goals.appAmount && (
                 <div className={SIDEBAR_COMPONENTS}>
+                    {percent >= 100 && (
+                        <Confetti
+                            width={window.innerWidth}
+                            height={window.innerHeight}
+                            recycle={false}
+                            numberOfPieces={500}
+                            gravity={0.2}
+                            colors={['#A2D2FF', '#B9FBC0', '#FDFD96', '#FFC8DD', '#CDB4DB', '#000000']}
+                        />
+                    )}
                     <h5>Application Progress</h5>
                     <p className="text-center m-0">{percent}%</p>
                     <div className="border border-3 border-dark bg-white" style={{borderRadius: '15px'}}>
