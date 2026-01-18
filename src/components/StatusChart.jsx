@@ -6,14 +6,13 @@ import {SIDEBAR_COMPONENTS} from "../utils/Constants.js";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function StatusChart({ jobs }) {
-    const activeJobs = jobs.filter(j => j.status !== 'Not Applied');
 
     const counts = {
-        Applied: activeJobs.filter(j => j.status === 'Applied').length,
-        Interviewing: activeJobs.filter(j => j.status === 'Interviewing').length,
-        Offered: activeJobs.filter(j => j.status === 'Offered').length,
-        Rejected: activeJobs.filter(j => j.status === 'Rejected').length,
-        Ghosted: activeJobs.filter(j => j.status === 'Ghosted').length,
+        Applied: jobs.filter(j => j.status === 'Applied').length,
+        Interviewing: jobs.filter(j => j.status === 'Interviewing').length,
+        Offered: jobs.filter(j => j.status === 'Offered').length,
+        Rejected: jobs.filter(j => j.status === 'Rejected').length,
+        Ghosted: jobs.filter(j => j.status === 'Ghosted').length,
     };
 
     const data = {
@@ -59,7 +58,7 @@ function StatusChart({ jobs }) {
                 />
             </div>
             <div className="text-center mt-3">
-                <strong>Total Active: {activeJobs.length}</strong>
+                <strong>Total Active: {jobs.length}</strong>
             </div>
         </div>
     );

@@ -10,7 +10,7 @@ function Goals({ onUpdate, initialData }) {
         workModel: '',
         salary: '',
         appFrequency: '',
-        appAmount: ''
+        appAmount: 0
     })
 
     const handleChange = (e) => {
@@ -24,6 +24,7 @@ function Goals({ onUpdate, initialData }) {
 
     return (
         <div className={SIDEBAR_COMPONENTS}>
+
             <h6 className="fw-bold mb-3">Goals</h6>
             <p className="text-muted small fst-italic">All fields optional.</p>
 
@@ -95,6 +96,9 @@ function Goals({ onUpdate, initialData }) {
                         </div>
                     </div>
                 </div>
+                {formState.appFrequency === 'Weekly' && (
+                    <p className="text-muted small fst-italic m-0">Week starts on Monday.</p>
+                )}
             </div>
 
             {/* Application Goal (number) */}
@@ -104,7 +108,7 @@ function Goals({ onUpdate, initialData }) {
                     name="appAmount"
                     type="number"
                     className={INPUT_FIELD}
-                    value={formState.appGoal}
+                    value={formState.appAmount}
                     onChange={handleChange}
                     placeholder="e.g. 5"
                     min="1"
